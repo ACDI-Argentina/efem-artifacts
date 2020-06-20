@@ -1,0 +1,42 @@
+version: "3"
+services:
+  mongo-db:
+    container_name: mongo-db
+    image: mongo:3.6.18
+    ports:
+     - "27017:27017"
+    volumes:
+     - mongodb-efem:/data/db
+  ipfs-efem:
+    container_name: ipfs-efem
+    image: ipfs/go-ipfs:latest
+    ports:
+     - "4001:4001"
+     - "8080:8080"
+     - "5001:5001"
+     
+  efem-feathers:
+    container_name: efem-feathers
+    image: efem/feathers
+    stdin_open: true
+    tty: true
+    restart: always
+    expose:
+      - "3030"
+    ports:
+      - "3030:3030"
+
+  efem-dapp:
+    container_name: efem-dapp
+    image: efem/dapp
+    stdin_open: true
+    tty: true
+    restart: always
+    expose:
+      - "3010"
+    ports:
+      - "3010:3010"
+networks:
+    efem-compose:
+volumes:
+    mongodb-efem:
