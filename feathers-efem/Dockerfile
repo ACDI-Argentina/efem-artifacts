@@ -15,7 +15,6 @@ RUN npm install pm2 -g
 ADD feathers .
 
 ADD ecosystem.config.js .
-ADD config/default.json config/default.json
 
 EXPOSE 3030
 
