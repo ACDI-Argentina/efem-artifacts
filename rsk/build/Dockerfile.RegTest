@@ -25,10 +25,14 @@ RUN \
   rm -f /etc/rsk/node.conf && \
   ln -s /etc/rsk/regtest.conf /etc/rsk/node.conf
 
+# Copy regtest.conf over to enable websocket connection
+COPY regtest.conf /etc/rsk/regtest.conf
+
 # Supervisod CONF
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 EXPOSE 4444
+EXPOSE 4445
 EXPOSE 30305
 
 # Define default command.
