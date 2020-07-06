@@ -7,12 +7,12 @@ RUN apt-get update && apt-get install telnet -y
 
 #Rather than copying the entire working directory, we are only copying the package.json file. 
 #This allows us to take advantage of cached Docker layers
-ADD feathers/package*.json .
+ADD app/package*.json .
 
 RUN npm install
 RUN npm install pm2 -g
 
-ADD feathers .
+ADD app .
 
 ADD ecosystem.config.js .
 
