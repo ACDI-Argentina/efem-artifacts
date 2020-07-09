@@ -1,34 +1,10 @@
 version: "3"
 services:
-  mongo-db:
-    container_name: mongo-db
-    image: mongo:3.6.18
-    ports:
-     - "27017:27017"
-    volumes:
-     - mongodb-efem:/data/db
-  ipfs-efem:
-    container_name: ipfs-efem
-    image: ipfs/go-ipfs:latest
-    ports:
-     - "4001:4001"
-     - "8080:8080"
-     - "5001:5001"
-     
-  efem-feathers:
-    container_name: efem-feathers
-    image: efem/feathers
-    stdin_open: true
-    tty: true
-    restart: always
-    expose:
-      - "3030"
-    ports:
-      - "3030:3030"
-
   efem-dapp:
     container_name: efem-dapp
     image: efem/dapp
+    volumes:
+      - ./config/dapp/configuration.js:/usr/src/app/src/configuration.js
     stdin_open: true
     tty: true
     restart: always
@@ -36,7 +12,63 @@ services:
       - "3010"
     ports:
       - "3010:3010"
-networks:
-    efem-compose:
+    depends_on:
+      - efem-rsk
+      - efem-ipfs
+      - efem-mongodb
+      - efem-feathers
+
+  efem-feathers:
+    container_name: efem-feathers
+    image: efem/feathers
+    volumes:
+      - ./config/feathers/default.json:/usr/src/app/config/default.json
+    stdin_open: true
+    tty: true
+    restart: always
+    expose:
+      - "3030"
+    ports:
+      - "3030:3030"
+    depends_on:
+      - efem-rsk
+      - efem-ipfs
+      - efem-mongodb
+
+  efem-rsk:
+    container_name: efem-rsk
+    image: efem/regtest
+    stdin_open: true
+    tty: true
+    expose:
+      - "4444"
+      - "4445"
+      - "30305"
+    ports:
+      - "4444:4444"
+      - "4445:4445"
+      - "30305:30305"
+
+  efem-ipfs:
+    container_name: efem-ipfs
+    image: ipfs/go-ipfs:latest
+    expose:
+      - "4001"
+      - "8080"
+      - "5001"
+    ports:
+      - "4001:4001"
+      - "8080:8080"
+      - "5001:5001"
+
+  efem-mongodb:
+    container_name: efem-mongodb
+    image: mongo:3.6.18
+    expose:
+      - "27017"
+    volumes:
+      - mongodb-efem-vol:/data/db
+
+
 volumes:
-    mongodb-efem:
+  mongodb-efem-vol:
