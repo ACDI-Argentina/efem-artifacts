@@ -5,9 +5,6 @@ services:
     image: efem/dapp
     volumes:
       - ./config/dapp/configuration.js:/usr/src/app/src/configuration.js
-    stdin_open: true
-    tty: true
-    restart: always
     expose:
       - "3010"
     ports:
@@ -23,9 +20,6 @@ services:
     image: efem/feathers
     volumes:
       - ./config/feathers/default.json:/usr/src/app/config/default.json
-    stdin_open: true
-    tty: true
-    restart: always
     expose:
       - "3030"
     ports:
@@ -38,8 +32,6 @@ services:
   efem-rsk:
     container_name: efem-rsk
     image: efem/regtest
-    stdin_open: true
-    tty: true
     expose:
       - "4444"
       - "4445"
@@ -68,7 +60,6 @@ services:
       - "27017"
     volumes:
       - mongodb-efem-vol:/data/db
-
 
 volumes:
   mongodb-efem-vol:
