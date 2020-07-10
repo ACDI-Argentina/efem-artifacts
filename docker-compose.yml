@@ -41,16 +41,11 @@ services:
     volumes:
       - ipfs-data:/data/ipfs
       - ipfs-export:/export
- #   expose:
- #     - "4001" # Swarm tcp, should be exposed to the public
- #     - "4001/udp" # Swarm tcp, should be exposed to the public
- #     - "5001"  # Daemon API; must not be exposed publicly but to client services under you control
- #     - "8080" # Web Gateway
     ports:
-      - "4001:4001"
-      - "4001:4001/udp"
-      - "5001:5001"
-      - "8080:8080"
+      - "4001:4001"     # Swarm tcp, should be exposed to the public
+      - "4001:4001/udp" # Swarm tcp, should be exposed to the public
+      - "5001:5001"     # Daemon API; must not be exposed publicly but to client services under you control
+      - "8080:8080"     # Web Gateway
 
   efem-mongodb:
     container_name: efem-mongodb
