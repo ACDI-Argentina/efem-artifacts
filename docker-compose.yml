@@ -3,10 +3,9 @@ services:
   efem-dapp:
     container_name: efem-dapp
     image: efem/dapp
+    build: ./dapp
     volumes:
-      - ./config/dapp/configuration.js:/usr/src/app/src/configuration.js
-    expose:
-      - "3010"
+      - ./dapp/config/configuration.js:/usr/src/app/src/configuration.js
     ports:
       - "3010:3010"
     depends_on:
@@ -18,10 +17,9 @@ services:
   efem-feathers:
     container_name: efem-feathers
     image: efem/feathers
+    build: ./feathers
     volumes:
-      - ./config/feathers/default.json:/usr/src/app/config/default.json
-    expose:
-      - "3030"
+      - ./feathers/config/default.json:/usr/src/app/config/default.json
     ports:
       - "3030:3030"
     depends_on:
@@ -32,10 +30,6 @@ services:
   efem-rsk:
     container_name: efem-rsk
     image: efem/regtest
-    expose:
-      - "4444"
-      - "4445"
-      - "30305"
     ports:
       - "4444:4444"
       - "4445:4445"
@@ -47,11 +41,11 @@ services:
     volumes:
       - ipfs-data:/data/ipfs
       - ipfs-export:/export
-    expose:
-      - "4001" # Swarm tcp, should be exposed to the public
-      - "4001/udp" # Swarm tcp, should be exposed to the public
-      - "5001"  # Daemon API; must not be exposed publicly but to client services under you control
-      - "8080" # Web Gateway
+ #   expose:
+ #     - "4001" # Swarm tcp, should be exposed to the public
+ #     - "4001/udp" # Swarm tcp, should be exposed to the public
+ #     - "5001"  # Daemon API; must not be exposed publicly but to client services under you control
+ #     - "8080" # Web Gateway
     ports:
       - "4001:4001"
       - "4001:4001/udp"
