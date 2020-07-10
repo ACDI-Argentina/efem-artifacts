@@ -1,9 +1,10 @@
 #!/bin/bash
 
+CONTAINER_NAME="efem-rsk"
 IMAGE_NAME="efem/regtest"
 
 docker run -d \
-           --name efem-rsk  \
+           --name ${CONTAINER_NAME} \
            -p 4444:4444 \
            -p 4445:4445\
            -p 30305:30305 \
