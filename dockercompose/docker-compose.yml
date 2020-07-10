@@ -64,9 +64,9 @@ services:
     expose:
       - "27017"
     volumes:
-      - mongodb-efem-vol:/data/db
+      - mongo-data:/data/db
 
 volumes:
-  mongodb-efem-vol:
+  mongo-data:
   ipfs-data:
   ipfs-export:
