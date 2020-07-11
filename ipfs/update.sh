@@ -5,4 +5,5 @@ docker exec efem-ipfs ipfs config --json Gateway.HTTPHeaders.Access-Control-Allo
 docker exec efem-ipfs ipfs config --json Gateway.HTTPHeaders.Access-Control-Allow-Methods '["PUT", "GET", "POST", "OPTIONS"]'
 docker exec efem-ipfs ipfs config --json Gateway.HTTPHeaders.Access-Control-Expose-Headers '["Ipfs-Hash"]'
 docker exec efem-ipfs ipfs config --json Gateway.Writable true
+docker restart efem-ipfs
 
