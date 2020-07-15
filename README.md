@@ -44,21 +44,6 @@ Para la construcción de las imágenes de dapp y de feathers, es necesario obten
 ```
 Una vez descargado el código fuente podemos continuar con la creación de las imágenes.
 
-## Build de imágenes
-Se requiere crear las imágenes de los siguientes contenedores previo a la ejecución:
-
-- Nodo RSK
-```bash
-cd rsk
-./build.sh
-```
-
-- IPFS
-```bash
-cd ipfs
-./build.sh
-```
-
 ## Ejecución
 Para iniciar los contenedores ejecutamos lo siguiente:
 ```bash

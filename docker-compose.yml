@@ -30,6 +30,9 @@ services:
   efem-rsk:
     container_name: efem-rsk
     image: efem/rsk-regtest
+    build: 
+      context: ./rsk
+      dockerfile: Dockerfile.RegTest
     ports:
       - "4444:4444"
       - "4445:4445"
@@ -38,6 +41,8 @@ services:
   efem-ipfs:
     container_name: efem-ipfs
     image: efem/ipfs
+    build: 
+      context: ./ipfs
     volumes:
       - ipfs-data:/data/ipfs
       - ipfs-export:/export
