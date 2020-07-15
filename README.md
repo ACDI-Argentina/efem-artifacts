@@ -17,7 +17,7 @@ Las imágenes a partir de las cuales se crean estos contenedores, se indican en 
 #### Volúmenes
 Tanto **efem-ipfs** como **efem-mongodb** necesitan persistir datos más allá del ciclo de vida del contenedor. Es decir, si el contenedor se detiene por algún motivo, sería deseable no perder los datos almacenados hasta el momento. Se utilizan tres vólumenes, dos para ipfs, y uno para mongodb. Es posible administrarlos utilizando ``docker volume``. En el caso de querer borrarlos, simplemente usamos ``docker-compose down -v``.
 #### Redes
-Por defecto, docker-compose crea una red virtual y conecta a todos los contenedores especificados en el mismo archivo. Gracias a esto los contenedores pueden referirse entre si utilizando un esquema de nombres. A modo de ejemplo efem-feathers, puede configurar la conexión a la base datos, utilizando la url ``http://efem-mongodb:27017/``
+Por defecto, docker-compose crea una red virtual y conecta a todos los contenedores especificados en el mismo archivo. Gracias a esto los contenedores pueden referirse entre si utilizando un esquema de nombres. A modo de ejemplo efem-feathers, puede configurar la conexión a la base datos, utilizando la url ``mongodb://efem-mongodb:27017/``
 donde *efem-mongodb* es el nombre del contenedor, y docker se encargará de resolverlo automáticamente.
 
 
@@ -27,6 +27,14 @@ Para poder ejecutar los contenedores es necesario tener instalado [**docker**](h
 
 Las pruebas se han realizado sobre Ubuntu 20.04, con Docker **19.03.8** y docker-compose  **1.25.0**. También es necesario contar con git para poder clonar los repositorios necesarios.
 
+## Configuración del ambiente
+
+Por workaround al problema de resolución de nombres, se deben agregar las siguientes entradas en el archivo */etc/hosts*.
+
+```
+127.0.0.1     efem-ipfs
+127.0.0.1     efem-feathers
+```
 
 ## Prerequisitos
 Para la construcción de las imágenes de dapp y de feathers, es necesario obtener el código fuente desde los repositorios en github, para eso usamos los scripts fetch-dapp y fetch-feathers, los cuales clonan la rama efem-dev en directorios locales.
@@ -36,12 +44,52 @@ Para la construcción de las imágenes de dapp y de feathers, es necesario obten
 ```
 Una vez descargado el código fuente podemos continuar con la creación de las imágenes.
 
+## Build de imágenes
+Se requiere crear las imágenes de los siguientes contenedores previo a la ejecución:
+
+- Nodo RSK
+```bash
+cd rsk
+./build.sh
+```
+
+- IPFS
+```bash
+cd ipfs
+./build.sh
+```
+
 ## Ejecución
 Para iniciar los contenedores ejecutamos lo siguiente:
 ```bash
 docker-compose up -d
+# Workaround por problema de configuración de CORS en IPFS.
+./ipfs/update.sh
 ```
 Esto iniciará todos los contenedores del esquema, en un orden adecuado. En el caso de aquellos contenedores para los cuales no tenga una imágen en el registro local, procederá a la creación de las mismas utilizando los Dockerfiles que se encuentren en los directorios especificados en  la directiva build del servicio. Esto puede tomar algo de tiempo la primera vez que lo ejecutemos, especialmente en el caso de dapp y feathers que son los dos contenedores que más dependencias instalan a partir de npm.
+
+## Despliegue de smart contracts
+
+Una vez que los servicios se encuentren levantados, es necesario desplegar el smart contract de Crowdfunding según sus instrucciones de [despliegue](https://github.com/ACDI-Argentina/efem-aragon-apps/tree/efem-dev/apps/crowdfunding#despliegue).
+
+Una vez completado el despliegue, debe tomarse la dirección de la App Crowdfunding:
+
+```
+Aragon deploy
+ . . .
+Crowdfunding deploy
+ - Libraries
+   . . .
+ - Crowdfunding: 0x05A55E87d40572ea0F9e9D37079FB9cA11bdCc67
+ . . .
+ - Initialized
+```
+
+Y configurar la siguiente variable según el ambiente:
+
+- *dapp/config/configuration.js#crowdfundingAddress*
+
+En el caso de desarrollo, el cambio será reflejado en la dapp sin necesidad de reiniciar su contenedor.
 
 ## Configuración de dapp y feathers
 

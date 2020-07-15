@@ -1,7 +1,7 @@
 #!/bin/bash
 
 CONTAINER_NAME="efem-rsk"
-IMAGE_NAME="efem/regtest"
+IMAGE_NAME="efem/rsk-regtest"
 
 docker run -d \
            --name ${CONTAINER_NAME} \

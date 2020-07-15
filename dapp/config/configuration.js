@@ -17,6 +17,7 @@ const {
   const configurations = {
     localhost: {
       title: 'localhost',
+      crowdfundingAddress: '0x05A55E87d40572ea0F9e9D37079FB9cA11bdCc67',
       liquidPledgingAddress: '0x46579394802b5e4d2C0647436BFcc71A2d9E8478',
       lppCampaignFactoryAddress: '0xe3155F7A49897e7860476b5A625B258ebe43cA98',
       lppCappedMilestoneFactoryAddress: '0x1b6E4a9eB8264E46784a782c87e3529E203425Ca',
@@ -36,6 +37,7 @@ const {
     },
     rsk_testnet: {
       title: 'RSK Testnet',
+      crowdfundingAddress: '0x05A55E87d40572ea0F9e9D37079FB9cA11bdCc67',
       liquidPledgingAddress: '0x581A2751C29F030730c99f9435c5f34A82BF4969',
       lppCampaignFactoryAddress: '0xcb5eea43731E1058e5c8FBc989CB2E221602Fb67',
       lppCappedMilestoneFactoryAddress: '0x43E3fC1f59C367b34Cab072AFb2dFE8CEA1CBAFa',
@@ -55,6 +57,7 @@ const {
     },
     rsk_mainnet: {
       title: 'RSK MainNet',
+      crowdfundingAddress: '0x05A55E87d40572ea0F9e9D37079FB9cA11bdCc67',
       liquidPledgingAddress: '0x86Fd7661114Ca0Cf959337CB7DAFbBE93dB248d2',
       lppCampaignFactoryAddress: '0xB874E4B1F4DBEEBCBdB8150EA8c71c3E96FCb40E',
       lppCappedMilestoneFactoryAddress: '0x95655dC505233d40e2c5A1d4590d142C8a721cb4',

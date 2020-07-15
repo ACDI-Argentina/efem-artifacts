@@ -29,7 +29,7 @@ services:
 
   efem-rsk:
     container_name: efem-rsk
-    image: efem/regtest
+    image: efem/rsk-regtest
     ports:
       - "4444:4444"
       - "4445:4445"
