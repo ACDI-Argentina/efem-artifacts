@@ -37,6 +37,21 @@ services:
       - "4444:4444"
       - "4445:4445"
       - "30305:30305"
+    restart: on-failure
+    healthcheck:
+      test: 
+         - "CMD"
+         - "curl"
+         - "-s"
+         - "-X"
+         - "POST"
+         - "-H"
+         - " \"Content-Type: application/json\" "
+         - "http://localhost:4444/"
+         - "--data"
+         - "'{\"jsonrpc\":\"2.0\",\"method\":\"eth_blockNumber\",\"params\":[],\"id\":1}'"
+      interval: 30s
+      retries: 1
 
   efem-ipfs:
     container_name: efem-ipfs
