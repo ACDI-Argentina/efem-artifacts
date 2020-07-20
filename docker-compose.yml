@@ -6,6 +6,8 @@ services:
     build: ./dapp
     volumes:
       - ./dapp/config/configuration.js:/usr/src/app/src/configuration.js
+      - /home/mauricio/dev/project/acdi/efem/efem-crowdfunding-dapp/src:/usr/src/app/src
+      - /home/mauricio/dev/project/acdi/efem/efem-aragon-apps/apps/crowdfunding:/usr/src/app/node_modules/@acdi/efem-crowdfunding
     ports:
       - "3010:3010"
     depends_on:
