@@ -6,8 +6,8 @@ services:
     build: ./dapp
     volumes:
       - ./dapp/config/configuration.js:/usr/src/app/src/configuration.js
-      - /home/mauricio/dev/project/acdi/efem/efem-crowdfunding-dapp/src:/usr/src/app/src
-      - /home/mauricio/dev/project/acdi/efem/efem-aragon-apps/apps/crowdfunding:/usr/src/app/node_modules/@acdi/efem-crowdfunding
+      - ${DAPP_PATH_SRC:-./dapp/app/src}:/usr/src/app/src
+      - ${SMART_CONTRACT_PROJECT}:/usr/src/app/node_modules/@acdi/efem-crowdfunding
     ports:
       - "3010:3010"
     depends_on:
@@ -53,7 +53,7 @@ services:
          - "--data"
          - "'{\"jsonrpc\":\"2.0\",\"method\":\"eth_blockNumber\",\"params\":[],\"id\":1}'"
       interval: 30s
-      retries: 1
+      retries: 3
 
   efem-ipfs:
     container_name: efem-ipfs
