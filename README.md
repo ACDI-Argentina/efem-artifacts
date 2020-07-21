@@ -1,5 +1,5 @@
 # El futuro está en el monte - Instructivo de despliegue 
-Debido a la cantidad de partes que componen la solución, cada una con sus distintos requisitos de dependencias, se decidió utilizar [docker  compose](https://docs.docker.com/compose/) para realizar el despliegue de la misma.
+Debido a la cantidad de partes que componen la solución, cada una con sus distintos requisitos de dependencias, se decidió utilizar [docker compose](https://docs.docker.com/compose/) para realizar el despliegue de la misma.
 Docker compose se basa en contenedores, los cuales contienen una parte de la solución junto con las dependencias requeridas por esa parte. Esto nos da como ventaja que podamos ejecutar, sin tener que instalar las dependencias de forma local, lo cual podría originar conflictos si ya tenemos otras versiones de las mismas. 
 
 ## Recursos definidos en docker-compose
@@ -99,3 +99,9 @@ La solución temporal fue agregar asociaciones en /etc/hosts los nombres de los 
 
 ```
 Este esquema se usa **solo de forma local con fines de desarrollo**. En el ambiente productivo, se ejecutarán los contenedores en distintos servidores, los cuales tendrán asociados nombres de dominio.
+
+### El contenedor efem-rsk no responde
+Algunas veces el contenedor efem-rsk queda en un estado inconsistente. Al ejecutar ``docker ps``  dicho contenedor se mostrará en estado unhealty. 
+Esto sucede cuando no es la primera vez que ejecutamos el entorno, ya que docker tratará de reutilizar el contenedor de efem-rsk creado anteriormente.
+Esto se soluciona fácilmente eliminando dicho contenedor con `docker rm efem-rsk` antes de hacer ``docker-compose up``
+
