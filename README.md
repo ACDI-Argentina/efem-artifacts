@@ -37,12 +37,21 @@ Por workaround al problema de resolución de nombres, se deben agregar las sigui
 ```
 
 ## Prerequisitos
+
+### Descarga de proyectos desde github
 Para la construcción de las imágenes de dapp y de feathers, es necesario obtener el código fuente desde los repositorios en github, para eso usamos los scripts fetch-dapp y fetch-feathers, los cuales clonan la rama efem-dev en directorios locales.
 ```bash
 ./fetch-dapp.sh
 ./fetch-feathers.sh
 ```
 Una vez descargado el código fuente podemos continuar con la creación de las imágenes.
+
+
+### Configuración de las variables de entorno
+Las variables utilizadas en el archivo docker-compose deben establecerse en el archivo .env que se encuentra en este directorio.
+Actualmente se utilizan para desarrollo sobre el contenedor efem-dapp. En el caso de que no sean necesarias, es posible comentar 
+las dos lineas que hacen referencia a los bind mounts del dicho contenedor.
+
 
 ## Ejecución
 Para iniciar los contenedores ejecutamos lo siguiente:
