@@ -67,28 +67,12 @@
     "0xee4b388fb98420811C9e04AE8378330C05A2735a"
   ],
   "fiatWhitelist": [
-    "AUD",
-    "BRL",
-    "CAD",
-    "CHF",
-    "CZK",
-    "DAI",
-    "ETH",
-    "EUR",
-    "GBP",
-    "MXN",
-    "THB",
     "USD"
   ],
   "tokenWhitelist": [
     {
-      "name": "BTC",
-      "symbol": "BTC",
-      "decimals": 18
-    },
-    {
-      "name": "ETH",
-      "symbol": "ETH",
+      "name": "RBTC",
+      "symbol": "RBTC",
       "decimals": 18
     }
   ],
