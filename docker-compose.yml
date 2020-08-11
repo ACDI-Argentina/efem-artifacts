@@ -7,6 +7,7 @@ services:
     volumes:
       - ./dapp/config/configuration.js:/usr/src/app/src/configuration.js
       - ${DAPP_PATH_SRC:-./dapp/app/src}:/usr/src/app/src
+      - ${DAPP_PATH_ENV:-./dapp/app/.env}:/usr/src/app/.env
       - ${SMART_CONTRACT_PROJECT}:/usr/src/app/node_modules/@acdi/efem-crowdfunding
     ports:
       - "3010:3010"

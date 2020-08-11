@@ -3,6 +3,7 @@ const {
     REACT_APP_DECIMALS = 8, // optional
     REACT_APP_FEATHERJS_CONNECTION_URL,
     REACT_APP_NODE_CONNECTION_URL,
+    REACT_APP_CROWDFUNDING_ADDRESS,
     REACT_APP_LIQUIDPLEDGING_ADDRESS,
     REACT_APP_CAMPAIGN_FACTORY_ADDRESS,
     REACT_APP_CAPPED_MILESTONE_FACTORY_ADDRESS,
@@ -34,6 +35,22 @@ const {
         useHotjar: false,
       },
       nativeTokenName: 'RBTC',
+      nativeToken: {
+        name: 'RBTC',
+        symbol: 'RBTC',
+        address: '0x0000000000000000000000000000000000000000'
+      },
+      fiat: {
+        symbol: 'USD',
+        showDecimals: 2
+      },
+      tokens: {
+        // Token Nativo
+        '0x0000000000000000000000000000000000000000': {
+          symbol: 'RBTC',
+          showDecimals: 4
+        }
+      }
     },
     rsk_testnet: {
       title: 'RSK Testnet',
@@ -54,6 +71,22 @@ const {
         useHotjar: false,
       },
       nativeTokenName: 'RBTC',
+      nativeToken: {
+        name: 'RBTC',
+        symbol: 'RBTC',
+        address: '0x0000000000000000000000000000000000000000'
+      },
+      fiat: {
+        symbol: 'USD',
+        showDecimals: 2
+      },
+      tokens: {
+        // Token Nativo
+        '0x0000000000000000000000000000000000000000': {
+          symbol: 'RBTC',
+          showDecimals: 4
+        }
+      }
     },
     rsk_mainnet: {
       title: 'RSK MainNet',
@@ -74,6 +107,22 @@ const {
         useHotjar: false,
       },
       nativeTokenName: 'RBTC',
+      nativeToken: {
+        name: 'RBTC',
+        symbol: 'RBTC',
+        address: '0x0000000000000000000000000000000000000000'
+      },
+      fiat: {
+        symbol: 'USD',
+        showDecimals: 2
+      },
+      tokens: {
+        // Token Nativo
+        '0x0000000000000000000000000000000000000000': {
+          symbol: 'RBTC',
+          showDecimals: 4
+        }
+      }
     },
   };
   
@@ -89,6 +138,7 @@ const {
   const config = Object.assign({}, configurations[REACT_APP_ENVIRONMENT]);
   
   // Overwrite the environment values with parameters
+  config.crowdfundingAddress = REACT_APP_CROWDFUNDING_ADDRESS || config.crowdfundingAddress;
   config.liquidPledgingAddress = REACT_APP_LIQUIDPLEDGING_ADDRESS || config.liquidPledgingAddress;
   config.campaignFactoryAddress =
     REACT_APP_CAMPAIGN_FACTORY_ADDRESS || config.lppCampaignFactoryAddress;
