@@ -4,7 +4,7 @@ WORKDIR /usr/src/app
 
 #Rather than copying the entire working directory, we are only copying the package.json file. 
 #This allows us to take advantage of cached Docker layers
-ADD app/package*.json .
+ADD app/package*.json ./
 
 RUN npm install
 
