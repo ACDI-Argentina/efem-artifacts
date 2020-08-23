@@ -8,7 +8,7 @@ services:
       - ./dapp/config/configuration.js:/usr/src/app/src/configuration.js
       - ${DAPP_PATH_SRC:-./dapp/app/src}:/usr/src/app/src
       - ${DAPP_PATH_ENV:-./dapp/app/.env}:/usr/src/app/.env
-      - ${SMART_CONTRACT_PROJECT}:/usr/src/app/node_modules/@acdi/efem-crowdfunding
+      - ${SMART_CONTRACT_PROJECT}:/usr/src/app/node_modules/@acdi/give4forests-crowdfunding-contract
     ports:
       - "3010:3010"
     depends_on:
@@ -34,7 +34,7 @@ services:
     container_name: efem-rsk
     image: efem/rsk-regtest
     build: 
-      context: ./rsk
+      context: ./rsk/regtest
       dockerfile: Dockerfile.RegTest
     ports:
       - "4444:4444"
@@ -75,6 +75,8 @@ services:
     image: mongo:3.6.18
     expose:
       - "27017"
+    ports:
+      - "27017:27017"
     volumes:
       - mongo-data:/data/db
 
