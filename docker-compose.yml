@@ -23,6 +23,8 @@ services:
     build: ./feathers
     volumes:
       - ./feathers/config/default.json:/usr/src/app/config/default.json
+      - ${FEATHERS_PATH_SRC:-./feathers/src}:/usr/src/app/src
+      - ${FEATHERS_PATH_ENV:-./feathers/.env}:/usr/src/app/.env
     ports:
       - "3030:3030"
     depends_on:
