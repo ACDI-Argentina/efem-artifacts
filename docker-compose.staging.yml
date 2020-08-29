@@ -1,0 +1,19 @@
+version: "3"
+services:
+  efem-dapp:
+    environment:
+      - REACT_APP_ENVIRONMENT=rsk_testnet
+      - REACT_APP_NODE_ID=31
+      - IPFS_PINNING_ENABLED=true
+      - CROWDFUNDING_ADDRESS='0x8baf2c0afb7c4e8baa9890982669d73307706610'
+      - FEATHERS_CONNECTION='http://x.x.x.x:yyyy'
+      - IPFS_GATEWAY='http://x.x.x.x:yyyy/ipfs/'
+      #TODO: Leer desde el .env las cosas que no deban ser publicas
+    ports:
+      - "80:3010"
+    restart: always
+  efem-feathers:
+    restart: always
+  efem-ipfs:
+    restart: always
+  
