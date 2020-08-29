@@ -60,10 +60,8 @@ services:
   efem-mongodb:
     container_name: efem-mongodb
     image: mongo:3.6.18
-    expose:
-      - "27017"
     ports:
-      - "27017:27017"
+      - "27017"
     volumes:
       - mongo-data:/data/db
 
