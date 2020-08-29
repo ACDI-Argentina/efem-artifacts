@@ -48,10 +48,17 @@ Una vez descargado el código fuente podemos continuar con la creación de las i
 
 
 ### Configuración de las variables de entorno
-Las variables utilizadas en el archivo docker-compose deben establecerse en el archivo .env que se encuentra en este directorio.
-Actualmente se utilizan para desarrollo sobre el contenedor efem-dapp. En el caso de que no sean necesarias, es posible comentar 
-las dos lineas que hacen referencia a los bind mounts del dicho contenedor.
+Las variables utilizadas en el archivo docker-compose deben establecerse en el archivo .env que se encuentra en este directorio. Son montajes opcionales utilizados con popósito de desarrollo.
 
+#### IPFS Pinning
+
+Para utilizar el servicio de IPFS Pinning de Pinata es necesario configurar las siguientes variables de entorno en el archivo *feathers/app/.env*:
+
+```
+PINATA_API_KEY="your pinata api key"
+PINATA_SECRET_API_KEY="your pinata secret api key"
+```
+Estas datos deben ser mantenidos fuera del versionado en Github.
 
 ## Ejecución
 Para iniciar los contenedores ejecutamos lo siguiente:

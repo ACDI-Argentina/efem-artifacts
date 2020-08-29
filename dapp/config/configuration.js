@@ -28,6 +28,7 @@ const {
       etherscan: 'https://explorer.testnet.rsk.co/', // this won't work, only here so we can see links during development
       feathersConnection: 'http://localhost:3030', //efem-feathers
       ipfsGateway: 'http://efem-ipfs:8080/ipfs/',
+      ipfsPinningEnabled: true,
       sendErrors: true,
       analytics: {
         ga_UA: 'UA-136337883-3',
@@ -64,6 +65,7 @@ const {
       etherscan: 'https://explorer.testnet.rsk.co/',
       feathersConnection: 'https://testnet.feathers.b4h.world',
       ipfsGateway: 'https://testnet.ipfs.b4h.world/ipfs/',
+      ipfsPinningEnabled: true,
       sendErrors: true,
       analytics: {
         ga_UA: 'UA-136337883-2',
@@ -100,6 +102,7 @@ const {
       etherscan: 'https://explorer.rsk.co/',
       feathersConnection: 'https://feathers.b4h.world',
       ipfsGateway: 'https://ipfs.b4h.world/ipfs/',
+      ipfsPinningEnabled: true,
       sendErrors: true,
       analytics: {
         ga_UA: 'UA-136337883-1',
