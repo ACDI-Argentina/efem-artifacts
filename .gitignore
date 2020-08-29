@@ -2,3 +2,4 @@
 dapp/app
 feathers/app
 
+.env
