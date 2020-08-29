@@ -45,6 +45,8 @@ Para la construcción de las imágenes de dapp y de feathers, es necesario obten
 ./fetch-feathers.sh
 ```
 Una vez descargado el código fuente podemos continuar con la creación de las imágenes.
+Este paso solo es necesario en el caso de que se quiera trabajar en un entorno de desarrollo, para otros entornos, las imagenes de los contenedores
+se obtendran directamente desde [dockerhub](https://hub.docker.com/u/acdi).
 
 
 ### Configuración de las variables de entorno
