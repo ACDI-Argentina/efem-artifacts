@@ -2,7 +2,7 @@ version: "3"
 services:
   efem-dapp:
     container_name: efem-dapp
-    image: efem/dapp
+    image: acdi/give4forests-dapp
     build: ./dapp
     volumes:
       - ./dapp/config/configuration.js:/usr/src/app/src/configuration.js
@@ -19,7 +19,7 @@ services:
 
   efem-feathers:
     container_name: efem-feathers
-    image: efem/feathers
+    image: acdi/give4forests-feathers
     build: ./feathers
     volumes:
       - ./feathers/config/default.json:/usr/src/app/config/default.json
@@ -45,7 +45,7 @@ services:
 
   efem-ipfs:
     container_name: efem-ipfs
-    image: efem/ipfs
+    image: acdi/give4forests-ipfs
     build: 
       context: ./ipfs
     volumes:
