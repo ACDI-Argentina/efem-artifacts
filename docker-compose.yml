@@ -32,17 +32,6 @@ services:
       - efem-ipfs
       - efem-mongodb
 
-  efem-rsk:
-    container_name: efem-rsk
-    image: efem/rsk-regtest
-    build: 
-      context: ./rsk/regtest
-      dockerfile: Dockerfile.RegTest
-    ports:
-      - "4444:4444"
-      - "4445:4445"
-      - "30305:30305"
-
   efem-ipfs:
     container_name: efem-ipfs
     image: acdi/give4forests-ipfs
@@ -64,6 +53,17 @@ services:
       - "27017"
     volumes:
       - mongo-data:/data/db
+
+  efem-rsk:
+    container_name: efem-rsk
+    image: efem/rsk-regtest
+    build: 
+      context: ./rsk/regtest
+      dockerfile: Dockerfile.RegTest
+    ports:
+      - "4444:4444"
+      - "4445:4445"
+      - "30305:30305"
 
 volumes:
   mongo-data:
