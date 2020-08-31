@@ -2,6 +2,8 @@ version: "3"
 services:
   efem-dapp:
     build: ./dapp
+    ports:
+      - "3010:3010"
     environment:
       - REACT_APP_ENVIRONMENT=localhost
       - REACT_APP_NODE_ID=33
@@ -20,6 +22,8 @@ services:
 
   efem-feathers:
     build: ./feathers
+    ports:
+      - "3030:3030"
     volumes:
       - ./feathers/config/default.json:/usr/src/app/config/default.json
       - ${FEATHERS_PATH_SRC:-./feathers/src}:/usr/src/app/src
@@ -31,6 +35,11 @@ services:
   efem-ipfs:
     build: 
       context: ./ipfs
+    ports:
+      - "4001:4001"     # Swarm tcp, should be exposed to the public
+      - "4001:4001/udp" # Swarm tcp, should be exposed to the public
+      - "5001:5001"     # Daemon API; must not be exposed publicly but to client services under you control
+      - "8080:8080"     # Web Gateway
 
 
   efem-rsk:

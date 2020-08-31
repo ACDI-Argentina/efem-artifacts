@@ -3,8 +3,6 @@ services:
   efem-dapp:
     container_name: efem-dapp
     image: acdi/give4forests-dapp
-    ports:
-      - "3010:3010"
     depends_on:
       - efem-ipfs
       - efem-mongodb
@@ -13,8 +11,6 @@ services:
   efem-feathers:
     container_name: efem-feathers
     image: acdi/give4forests-feathers
-    ports:
-      - "3030:3030"
     depends_on:
       - efem-ipfs
       - efem-mongodb
@@ -25,11 +21,6 @@ services:
     volumes:
       - ipfs-data:/data/ipfs
       - ipfs-export:/export
-    ports:
-      - "4001:4001"     # Swarm tcp, should be exposed to the public
-      - "4001:4001/udp" # Swarm tcp, should be exposed to the public
-      - "5001:5001"     # Daemon API; must not be exposed publicly but to client services under you control
-      - "8080:8080"     # Web Gateway
 
   efem-mongodb:
     container_name: efem-mongodb
