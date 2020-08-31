@@ -18,7 +18,7 @@ const {
   const configurations = {
     localhost: {
       language: {
-        default: 'en',
+        default: 'es',
         options: [
           { key: "es", name: "Español" },
           { key: "en", name: "English" }
