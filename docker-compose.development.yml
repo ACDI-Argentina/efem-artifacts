@@ -7,10 +7,11 @@ services:
     environment:
       - REACT_APP_ENVIRONMENT=localhost
       - REACT_APP_NODE_ID=33
-      - IPFS_PINNING_ENABLED=false
-      - CROWDFUNDING_ADDRESS='0xC1007078659F3814607eB7883d6bfc3902212c86'
-      - FEATHERS_CONNECTION='http://localhost:3030'
-      - IPFS_GATEWAY='http://localhost:8080/ipfs/'
+      - REACT_APP_CROWDFUNDING_ADDRESS=0xC1007078659F3814607eB7883d6bfc3902212c86
+      - REACT_APP_FEATHERJS_CONNECTION_URL=http://localhost:3030
+      - REACT_APP_IPFS_PINNING_ENABLED=false
+      - REACT_APP_IPFS_GATEWAY=http://localhost:8080/ipfs/
+
     volumes:
       - ./dapp/config/configuration.js:/usr/src/app/src/configuration.js
       - ${DAPP_PATH_SRC:-./dapp/app/src}:/usr/src/app/src

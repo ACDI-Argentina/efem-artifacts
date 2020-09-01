@@ -5,12 +5,12 @@ services:
       - "80:3010"
     environment:
       - REACT_APP_ENVIRONMENT=rsk_testnet
+      - REACT_APP_NODE_CONNECTION_URL=https://public-node.testnet.rsk.co
       - REACT_APP_NODE_ID=31
-      - IPFS_PINNING_ENABLED=true
-      - CROWDFUNDING_ADDRESS='0x8baf2c0afb7c4e8baa9890982669d73307706610'
-      - FEATHERS_CONNECTION='http://x.x.x.x:yyyy'
-      - IPFS_GATEWAY='http://x.x.x.x:yyyy/ipfs/'
-      #TODO: Leer desde el .env las cosas que no deban ser publicas
+      - REACT_APP_CROWDFUNDING_ADDRESS='0x8baf2c0afb7c4e8baa9890982669d73307706610'
+      - REACT_APP_FEATHERJS_CONNECTION_URL='http://x.x.x.x:yyyy'
+      - REACT_APP_IPFS_GATEWAY='http://x.x.x.x:yyyy/ipfs/'
+      - REACT_APP_IPFS_PINNING_ENABLED=true
     restart: always
   efem-feathers:
     ports:
