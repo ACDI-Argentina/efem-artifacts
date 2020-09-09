@@ -99,9 +99,35 @@ const configurations = {
       symbol: 'USD',
       showDecimals: 2
     },
-    tokens: {
-      // Token Nativo
-      '0x0000000000000000000000000000000000000000': {
+    rsk_testnet: {
+      language: {
+        default: 'es',
+        options: [
+          { key: "es", name: "Español" },
+          { key: "en", name: "English" }
+        ]
+      },
+      title: 'RSK Testnet',
+      crowdfundingAddress: '0xC1007078659F3814607eB7883d6bfc3902212c86',
+      liquidPledgingAddress: '0x581A2751C29F030730c99f9435c5f34A82BF4969',
+      lppCampaignFactoryAddress: '0xcb5eea43731E1058e5c8FBc989CB2E221602Fb67',
+      lppCappedMilestoneFactoryAddress: '0x43E3fC1f59C367b34Cab072AFb2dFE8CEA1CBAFa',
+      nodeConnection: 'https://testnet.node.b4h.world',
+      networkName: 'rsk_testnet',
+      nodeId: 31,
+      etherscan: 'https://explorer.testnet.rsk.co/',
+      feathersConnection: 'https://testnet.feathers.b4h.world',
+      ipfsGateway: 'https://testnet.ipfs.b4h.world/ipfs/',
+      ipfsPinningEnabled: true,
+      sendErrors: true,
+      analytics: {
+        ga_UA: 'UA-136337883-2',
+        useGoogleAnalytics: true,
+        useHotjar: false,
+      },
+      nativeTokenName: 'RBTC',
+      nativeToken: {
+        name: 'RBTC',
         symbol: 'RBTC',
         logoCid: '/ipfs/QmTsctkHWeVcuz6z2AWdi5zv3YCcVWSbmg2XF3tVs8jfn1',
         showDecimals: 4
@@ -116,78 +142,75 @@ const configurations = {
         { key: "en", name: "English", flag: "US" }
       ]
     },
-    title: 'RSK MainNet',
-    crowdfundingAddress: '0xC1007078659F3814607eB7883d6bfc3902212c86',
-    liquidPledgingAddress: '0x86Fd7661114Ca0Cf959337CB7DAFbBE93dB248d2',
-    lppCampaignFactoryAddress: '0xB874E4B1F4DBEEBCBdB8150EA8c71c3E96FCb40E',
-    lppCappedMilestoneFactoryAddress: '0x95655dC505233d40e2c5A1d4590d142C8a721cb4',
-    nodeConnection: 'https://node.b4h.world',
-    networkName: 'rsk_mainnet',
-    nodeId: 30,
-    etherscan: 'https://explorer.rsk.co/',
-    feathersConnection: 'https://feathers.b4h.world',
-    ipfsGateway: 'https://ipfs.b4h.world/ipfs/',
-    ipfsPinningEnabled: true,
-    sendErrors: true,
-    analytics: {
-      ga_UA: 'UA-136337883-1',
-      useGoogleAnalytics: true,
-      useHotjar: false,
-    },
-    nativeTokenName: 'RBTC',
-    nativeToken: {
-      name: 'RBTC',
-      symbol: 'RBTC',
-      address: '0x0000000000000000000000000000000000000000'
-    },
-    fiat: {
-      symbol: 'USD',
-      showDecimals: 2
-    },
-    tokens: {
-      // Token Nativo
-      '0x0000000000000000000000000000000000000000': {
+    rsk_mainnet: {
+      language: {
+        default: 'es',
+        options: [
+          { key: "es", name: "Español" },
+          { key: "en", name: "English" }
+        ]
+      },
+      title: 'RSK MainNet',
+      crowdfundingAddress: '0xC1007078659F3814607eB7883d6bfc3902212c86',
+      liquidPledgingAddress: '0x86Fd7661114Ca0Cf959337CB7DAFbBE93dB248d2',
+      lppCampaignFactoryAddress: '0xB874E4B1F4DBEEBCBdB8150EA8c71c3E96FCb40E',
+      lppCappedMilestoneFactoryAddress: '0x95655dC505233d40e2c5A1d4590d142C8a721cb4',
+      nodeConnection: 'https://node.b4h.world',
+      networkName: 'rsk_mainnet',
+      nodeId: 30,
+      etherscan: 'https://explorer.rsk.co/',
+      feathersConnection: 'https://feathers.b4h.world',
+      ipfsGateway: 'https://ipfs.b4h.world/ipfs/',
+      ipfsPinningEnabled: true,
+      sendErrors: true,
+      analytics: {
+        ga_UA: 'UA-136337883-1',
+        useGoogleAnalytics: true,
+        useHotjar: false,
+      },
+      nativeTokenName: 'RBTC',
+      nativeToken: {
+        name: 'RBTC',
         symbol: 'RBTC',
         logoCid: '/ipfs/QmTsctkHWeVcuz6z2AWdi5zv3YCcVWSbmg2XF3tVs8jfn1',
         showDecimals: 4
       }
-    }
-  },
-};
+    },
+  };
 
-// Unknown environment
-if (configurations[REACT_APP_ENVIRONMENT] === undefined)
-  throw new Error(
-    `There is no configuration object for environment: ${REACT_APP_ENVIRONMENT}. Expected REACT_APP_ENVIRONMENT to be empty or one of: ${Object.keys(
-      configurations,
-    )}`,
-  );
+  // Unknown environment
+  if (configurations[REACT_APP_ENVIRONMENT] === undefined)
+    throw new Error(
+      `There is no configuration object for environment: ${REACT_APP_ENVIRONMENT}. Expected REACT_APP_ENVIRONMENT to be empty or one of: ${Object.keys(
+        configurations,
+      )}`,
+    );
+  
+  // Create config object based on environment setup
+  const config = Object.assign({}, configurations[REACT_APP_ENVIRONMENT]);
+  
+  // Overwrite the environment values with parameters
+  config.crowdfundingAddress = REACT_APP_CROWDFUNDING_ADDRESS || config.crowdfundingAddress;
+  config.liquidPledgingAddress = REACT_APP_LIQUIDPLEDGING_ADDRESS || config.liquidPledgingAddress;
+  config.campaignFactoryAddress =
+    REACT_APP_CAMPAIGN_FACTORY_ADDRESS || config.lppCampaignFactoryAddress;
+  config.cappedMilestoneFactoryAddress =
+    REACT_APP_CAPPED_MILESTONE_FACTORY_ADDRESS || config.lppCappedMilestoneFactoryAddress;
+  config.tokenAddresses = REACT_APP_TOKEN_ADDRESSES
+    ? JSON.parse(REACT_APP_TOKEN_ADDRESSES)
+    : config.tokenAddresses;
+  config.etherscan = REACT_APP_BLOCKEXPLORER || config.etherscan;
+  config.feathersConnection = REACT_APP_FEATHERJS_CONNECTION_URL || config.feathersConnection;
+  config.nodeConnection = REACT_APP_NODE_CONNECTION_URL || config.nodeConnection;
+  config.decimals = REACT_APP_DECIMALS;
+  config.bugsEmail = REACT_APP_BUGS_EMAIL;
+  config.networkName = REACT_APP_NETWORK_NAME || config.networkName;
+  config.nodeId = (REACT_APP_NODE_ID && Number.parseInt(REACT_APP_NODE_ID, 10)) || config.nodeId;
+  config.nativeTokenName = REACT_APP_NATIVE_TOKEN_NAME || config.nativeTokenName;
 
-// Create config object based on environment setup
-const config = Object.assign({}, configurations[REACT_APP_ENVIRONMENT]);
-
-// Overwrite the environment values with parameters
-config.crowdfundingAddress = REACT_APP_CROWDFUNDING_ADDRESS || config.crowdfundingAddress;
-config.liquidPledgingAddress = REACT_APP_LIQUIDPLEDGING_ADDRESS || config.liquidPledgingAddress;
-config.campaignFactoryAddress =
-  REACT_APP_CAMPAIGN_FACTORY_ADDRESS || config.lppCampaignFactoryAddress;
-config.cappedMilestoneFactoryAddress =
-  REACT_APP_CAPPED_MILESTONE_FACTORY_ADDRESS || config.lppCappedMilestoneFactoryAddress;
-config.tokenAddresses = REACT_APP_TOKEN_ADDRESSES
-  ? JSON.parse(REACT_APP_TOKEN_ADDRESSES)
-  : config.tokenAddresses;
-config.etherscan = REACT_APP_BLOCKEXPLORER || config.etherscan;
-config.feathersConnection = REACT_APP_FEATHERJS_CONNECTION_URL || config.feathersConnection;
-config.nodeConnection = REACT_APP_NODE_CONNECTION_URL || config.nodeConnection;
-config.decimals = REACT_APP_DECIMALS;
-config.bugsEmail = REACT_APP_BUGS_EMAIL;
-config.networkName = REACT_APP_NETWORK_NAME || config.networkName;
-config.nodeId = (REACT_APP_NODE_ID && Number.parseInt(REACT_APP_NODE_ID, 10)) || config.nodeId;
-config.nativeTokenName = REACT_APP_NATIVE_TOKEN_NAME || config.nativeTokenName;
-
-config.ipfsGateway = REACT_APP_IPFS_GATEWAY || config.ipfsGateway;
-config.ipfsPinningEnabled = (REACT_APP_IPFS_PINNING_ENABLED !== undefined)? REACT_APP_IPFS_PINNING_ENABLED : config.ipfsPinningEnabled;
-
-//config.sendErrors = ['develop', 'release', 'beta', 'rsk_testnet'].includes(REACT_APP_ENVIRONMENT);
-console.log(config);
-export default config;
+  config.ipfsGateway = REACT_APP_IPFS_GATEWAY || config.ipfsGateway;
+  config.ipfsPinningEnabled = (REACT_APP_IPFS_PINNING_ENABLED !== undefined)? REACT_APP_IPFS_PINNING_ENABLED : config.ipfsPinningEnabled;
+  
+  //config.sendErrors = ['develop', 'release', 'beta', 'rsk_testnet'].includes(REACT_APP_ENVIRONMENT);
+  console.log(config);
+  export default config;
