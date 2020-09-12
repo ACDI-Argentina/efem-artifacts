@@ -18,7 +18,7 @@ const {
   const configurations = {
     localhost: {
       language: {
-        default: 'es',
+        default: 'en',
         options: [
           { key: "es", name: "Español" },
           { key: "en", name: "English" }
@@ -56,13 +56,14 @@ const {
         // Token Nativo
         '0x0000000000000000000000000000000000000000': {
           symbol: 'RBTC',
+          logoCid: '/ipfs/QmTsctkHWeVcuz6z2AWdi5zv3YCcVWSbmg2XF3tVs8jfn1',
           showDecimals: 4
         }
       }
     },
     rsk_testnet: {
       language: {
-        default: 'es',
+        default: 'en',
         options: [
           { key: "es", name: "Español" },
           { key: "en", name: "English" }
@@ -100,13 +101,14 @@ const {
         // Token Nativo
         '0x0000000000000000000000000000000000000000': {
           symbol: 'RBTC',
+          logoCid: '/ipfs/QmTsctkHWeVcuz6z2AWdi5zv3YCcVWSbmg2XF3tVs8jfn1',
           showDecimals: 4
         }
       }
     },
     rsk_mainnet: {
       language: {
-        default: 'es',
+        default: 'en',
         options: [
           { key: "es", name: "Español" },
           { key: "en", name: "English" }
@@ -144,6 +146,7 @@ const {
         // Token Nativo
         '0x0000000000000000000000000000000000000000': {
           symbol: 'RBTC',
+          logoCid: '/ipfs/QmTsctkHWeVcuz6z2AWdi5zv3YCcVWSbmg2XF3tVs8jfn1',
           showDecimals: 4
         }
       }
