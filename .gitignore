@@ -1,3 +1,5 @@
 **/node_modules/
 dapp/app
 feathers/app
+
+.env

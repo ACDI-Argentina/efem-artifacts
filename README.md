@@ -8,8 +8,8 @@ La solución está compuesta por los siguientes contenedores:
 * efem-dapp
 * efem-feathers
 * efem-ipfs
-* efem-rsk
 * efem-mongodb 
+* efem-rsk (solo disponible en el environment development)
 
 Las imágenes a partir de las cuales se crean estos contenedores, se indican en el diagrama a continuación.
 ![EFEM Despliegue](despliegue.svg)
@@ -45,6 +45,8 @@ Para la construcción de las imágenes de dapp y de feathers, es necesario obten
 ./fetch-feathers.sh
 ```
 Una vez descargado el código fuente podemos continuar con la creación de las imágenes.
+Este paso solo es necesario en el caso de que se quiera trabajar en un entorno de desarrollo, para otros entornos, las imagenes de los contenedores
+se obtendran directamente desde [dockerhub](https://hub.docker.com/u/acdi).
 
 
 ### Configuración de las variables de entorno
@@ -61,9 +63,10 @@ PINATA_SECRET_API_KEY="your pinata secret api key"
 Estas datos deben ser mantenidos fuera del versionado en Github.
 
 ## Ejecución
-Para iniciar los contenedores ejecutamos lo siguiente:
+Al momento de ejecutar los contenedores, debemos elegir cual es el environment [development | staging | production] que se desea utilizar.
+A modo de ejemplo, para iniciar el enviroment de development, el cual es utilizado para el desarrollo local, debemos ejecutar lo siguiente:
 ```bash
-docker-compose up -d
+docker-compose -f docker-compose.yml -f docker-compose.development.yml up -d
 # Workaround por problema de configuración de CORS en IPFS.
 ./ipfs/update.sh
 ```

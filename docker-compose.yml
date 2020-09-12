@@ -2,83 +2,31 @@ version: "3"
 services:
   efem-dapp:
     container_name: efem-dapp
-    image: efem/dapp
-    build: ./dapp
-    volumes:
-      - ./dapp/config/configuration.js:/usr/src/app/src/configuration.js
-      - ${DAPP_PATH_SRC:-./dapp/app/src}:/usr/src/app/src
-      - ${DAPP_PATH_ENV:-./dapp/app/.env}:/usr/src/app/.env
-      - ${SMART_CONTRACT_PROJECT}:/usr/src/app/node_modules/@acdi/give4forests-crowdfunding-contract
-    ports:
-      - "3010:3010"
+    image: acdi/give4forests-dapp
     depends_on:
-      - efem-rsk
       - efem-ipfs
       - efem-mongodb
       - efem-feathers
 
   efem-feathers:
     container_name: efem-feathers
-    image: efem/feathers
-    build: ./feathers
-    volumes:
-      - ./feathers/config/default.json:/usr/src/app/config/default.json
-      - ${FEATHERS_PATH_SRC:-./feathers/src}:/usr/src/app/src
-      - ${FEATHERS_PATH_ENV:-./feathers/.env}:/usr/src/app/.env
-    ports:
-      - "3030:3030"
+    image: acdi/give4forests-feathers
     depends_on:
-      - efem-rsk
       - efem-ipfs
       - efem-mongodb
 
-  efem-rsk:
-    container_name: efem-rsk
-    image: efem/rsk-regtest
-    build: 
-      context: ./rsk/regtest
-      dockerfile: Dockerfile.RegTest
-    ports:
-      - "4444:4444"
-      - "4445:4445"
-      - "30305:30305"
-    restart: on-failure
-    healthcheck:
-      test: 
-         - "CMD"
-         - "curl"
-         - "-s"
-         - "-X"
-         - "POST"
-         - "-H"
-         - " \"Content-Type: application/json\" "
-         - "http://localhost:4444/"
-         - "--data"
-         - "'{\"jsonrpc\":\"2.0\",\"method\":\"eth_blockNumber\",\"params\":[],\"id\":1}'"
-      interval: 30s
-      retries: 3
-
   efem-ipfs:
     container_name: efem-ipfs
-    image: efem/ipfs
-    build: 
-      context: ./ipfs
+    image: acdi/give4forests-ipfs
     volumes:
       - ipfs-data:/data/ipfs
       - ipfs-export:/export
-    ports:
-      - "4001:4001"     # Swarm tcp, should be exposed to the public
-      - "4001:4001/udp" # Swarm tcp, should be exposed to the public
-      - "5001:5001"     # Daemon API; must not be exposed publicly but to client services under you control
-      - "8080:8080"     # Web Gateway
 
   efem-mongodb:
     container_name: efem-mongodb
     image: mongo:3.6.18
-    expose:
-      - "27017"
     ports:
-      - "27017:27017"
+      - "27017"
     volumes:
       - mongo-data:/data/db
 

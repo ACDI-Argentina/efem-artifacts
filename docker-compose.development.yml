@@ -1,0 +1,55 @@
+version: "3"
+services:
+  efem-dapp:
+    build: ./dapp
+    ports:
+      - "3010:3010"
+    environment:
+      - REACT_APP_ENVIRONMENT=localhost
+      - REACT_APP_NODE_ID=33
+      - REACT_APP_CROWDFUNDING_ADDRESS=0xC1007078659F3814607eB7883d6bfc3902212c86
+      - REACT_APP_FEATHERJS_CONNECTION_URL=http://localhost:3030
+      - REACT_APP_IPFS_PINNING_ENABLED=false
+      - REACT_APP_IPFS_GATEWAY=http://localhost:8080/ipfs/
+
+    volumes:
+      - ./dapp/config/configuration.js:/usr/src/app/src/configuration.js
+      - ${DAPP_PATH_SRC:-./dapp/app/src}:/usr/src/app/src
+      - ${DAPP_PATH_ENV:-./dapp/app/.env}:/usr/src/app/.env
+      - ${SMART_CONTRACT_PROJECT}:/usr/src/app/node_modules/@acdi/give4forests-crowdfunding-contract
+    depends_on:
+      - efem-rsk
+
+
+  efem-feathers:
+    build: ./feathers
+    ports:
+      - "3030:3030"
+    volumes:
+      - ./feathers/config/default.json:/usr/src/app/config/default.json
+      - ${FEATHERS_PATH_SRC:-./feathers/src}:/usr/src/app/src
+      - ${FEATHERS_PATH_ENV:-./feathers/.env}:/usr/src/app/.env
+    depends_on:
+      - efem-rsk
+
+
+  efem-ipfs:
+    build: 
+      context: ./ipfs
+    ports:
+      - "4001:4001"     # Swarm tcp, should be exposed to the public
+      - "4001:4001/udp" # Swarm tcp, should be exposed to the public
+      - "5001:5001"     # Daemon API; must not be exposed publicly but to client services under you control
+      - "8080:8080"     # Web Gateway
+
+
+  efem-rsk:
+    container_name: efem-rsk
+    image: efem/rsk-regtest
+    build: 
+      context: ./rsk/regtest
+      dockerfile: Dockerfile.RegTest
+    ports:
+      - "4444:4444"
+      - "4445:4445"
+      - "30305:30305"
