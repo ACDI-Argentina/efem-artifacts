@@ -99,40 +99,6 @@ const configurations = {
       symbol: 'USD',
       showDecimals: 2
     },
-    rsk_testnet: {
-      language: {
-        default: 'es',
-        options: [
-          { key: "es", name: "Español" },
-          { key: "en", name: "English" }
-        ]
-      },
-      title: 'RSK Testnet',
-      crowdfundingAddress: '0x05A55E87d40572ea0F9e9D37079FB9cA11bdCc67',
-      liquidPledgingAddress: '0x581A2751C29F030730c99f9435c5f34A82BF4969',
-      lppCampaignFactoryAddress: '0xcb5eea43731E1058e5c8FBc989CB2E221602Fb67',
-      lppCappedMilestoneFactoryAddress: '0x43E3fC1f59C367b34Cab072AFb2dFE8CEA1CBAFa',
-      nodeConnection: 'https://testnet.node.b4h.world',
-      networkName: 'rsk_testnet',
-      nodeId: 31,
-      etherscan: 'https://explorer.testnet.rsk.co/',
-      feathersConnection: 'https://testnet.feathers.b4h.world',
-      ipfsGateway: 'https://testnet.ipfs.b4h.world/ipfs/',
-      ipfsPinningEnabled: true,
-      sendErrors: true,
-      analytics: {
-        ga_UA: 'UA-136337883-2',
-        useGoogleAnalytics: true,
-        useHotjar: false,
-      },
-      nativeTokenName: 'RBTC',
-      nativeToken: {
-        name: 'RBTC',
-        symbol: 'RBTC',
-        logoCid: '/ipfs/QmTsctkHWeVcuz6z2AWdi5zv3YCcVWSbmg2XF3tVs8jfn1',
-        showDecimals: 4
-      }
-    }
   },
   rsk_mainnet: {
     language: {
