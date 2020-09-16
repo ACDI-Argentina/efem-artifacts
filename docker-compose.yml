@@ -3,6 +3,7 @@ services:
   efem-dapp:
     container_name: efem-dapp
     image: acdi/give4forests-dapp
+    stdin_open: true
     depends_on:
       - efem-ipfs
       - efem-mongodb
