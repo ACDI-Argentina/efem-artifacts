@@ -1,6 +1,6 @@
 #!/bin/bash
 REPO=https://github.com/ACDI-Argentina/efem-crowdfunding-dapp.git
-BRANCH=efem-dev
+BRANCH=master
 TARGET_DIR=./dapp/app
 
 rm -rf ${TARGET_DIR}
