@@ -67,9 +67,10 @@ const configurations = {
       '0x0000000000000000000000000000000000000000': {
         symbol: 'RBTC',
         logoCid: '/ipfs/QmTsctkHWeVcuz6z2AWdi5zv3YCcVWSbmg2XF3tVs8jfn1',
-        showDecimals: 4
+        showDecimals: 5
       }
-    }
+    },
+    anonymousDonationThreshold: 10000
   },
   rsk_testnet: {
     network: {
@@ -114,6 +115,7 @@ const configurations = {
       symbol: 'USD',
       showDecimals: 2
     },
+    anonymousDonationThreshold: 10000
   },
   rsk_mainnet: {
     network: {
@@ -153,8 +155,9 @@ const configurations = {
       name: 'RBTC',
       symbol: 'RBTC',
       logoCid: '/ipfs/QmTsctkHWeVcuz6z2AWdi5zv3YCcVWSbmg2XF3tVs8jfn1',
-      showDecimals: 4
-    }
+      showDecimals: 5
+    },
+    anonymousDonationThreshold: 10000
   },
 };
 
