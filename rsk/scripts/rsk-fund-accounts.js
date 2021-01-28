@@ -39,3 +39,21 @@ web3.eth.sendTransaction({
     console.log(`Confirmation Number: ${confNumber}`);
     console.log(`Receipt`, receipt);
 });*/
+
+web3.eth.sendTransaction({
+    from: from,
+    to: '0x88cdf02b2e399357fec31e650a5148c30e715746',
+    value: value
+})
+
+
+web3.eth.sendTransaction({
+    from: from,
+    to: '0xe56226a43Da05D343F53DFded8eFd3e4Fb3cD07B',
+    value: value
+})
+
+
+console.log("Done!")
+
+
