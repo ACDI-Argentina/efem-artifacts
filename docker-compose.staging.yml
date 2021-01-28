@@ -7,16 +7,19 @@ services:
       - REACT_APP_ENVIRONMENT=rsk_testnet
       - REACT_APP_NODE_CONNECTION_URL=https://public-node.testnet.rsk.co
       - REACT_APP_NODE_ID=31
-      - REACT_APP_CROWDFUNDING_ADDRESS=0xf04AF9F96BF1E276556cb9e3C4874FBB05F96e92
-      - REACT_APP_EXCHANGE_RATE_PROVIDER_ADDRESS=0x774260455CEcbe0e868f455E129fA253ada5506c
-      - REACT_APP_FEATHERJS_CONNECTION_URL=http://x.x.x.x:yyyy
-      - REACT_APP_IPFS_GATEWAY=http://x.x.x.x:yyyy/ipfs/
+      - REACT_APP_CROWDFUNDING_ADDRESS=0x49733dF856718066Ca3eFA3a55B1Fa00c74C13de
+      - REACT_APP_EXCHANGE_RATE_PROVIDER_ADDRESS=0x0Aa058aD63E36bC2f98806f2D638353AE89C3634
+      - REACT_APP_FEATHERJS_CONNECTION_URL=https://beta.give4forest.org/
+      - REACT_APP_IPFS_GATEWAY=https://beta.give4forest.org/ipfs/
       - REACT_APP_IPFS_PINNING_ENABLED=true
     restart: always
   efem-feathers:
     ports:
       - "3030:3030"
     restart: always
+    volumes:
+      - ./feathers/config/default.json:/usr/src/app/config/default.json
+      - ./feathers/config/.env:/usr/src/app/.env
   efem-ipfs:
     ports:
       - "4001:4001"     # Swarm tcp, should be exposed to the public
