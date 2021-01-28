@@ -1,5 +1,6 @@
 **/node_modules/
 dapp/app
 feathers/app
+dapp-staging/build
 
 .env
