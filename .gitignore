@@ -4,3 +4,4 @@ feathers/app
 dapp-staging/build
 
 .env
+users-tesnet.json
