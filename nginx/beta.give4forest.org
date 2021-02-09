@@ -1,0 +1,50 @@
+upstream ipfs {
+  server localhost:8080;
+}
+
+upstream feathers {
+  server localhost:3030;
+}
+
+
+server {
+    server_name beta.give4forest.org;
+
+    index index.html index.htm;
+    root /home/jona/build;
+
+
+    location /ipfs/ { 
+       proxy_pass http://ipfs;
+    }
+
+   location /feathers/ {
+       proxy_pass http://feathers/;
+    }
+
+    location /socket.io/ {
+      proxy_pass http://feathers;
+      proxy_http_version 1.1;
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection "Upgrade";
+      proxy_set_header Host $host;
+    }
+
+
+    location / {
+      try_files $uri /index.html;
+    }
+     
+}
+
+
+
+
+server {
+     listen 80;
+     listen [::]:80;
+     server_name beta.give4forest.org;
+
+}
+
+
