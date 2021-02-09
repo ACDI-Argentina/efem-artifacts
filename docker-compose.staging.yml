@@ -2,7 +2,7 @@ version: "3"
 services:
   efem-dapp:
     ports:
-      - "80:3010"
+      - "3010:3010"
     environment:
       - REACT_APP_ENVIRONMENT=rsk_testnet
       - REACT_APP_NODE_CONNECTION_URL=https://public-node.testnet.rsk.co
