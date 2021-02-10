@@ -1,18 +1,18 @@
 version: "3"
 services:
-  efem-dapp:
-    ports:
-      - "3010:3010"
-    environment:
-      - REACT_APP_ENVIRONMENT=rsk_testnet
-      - REACT_APP_NODE_CONNECTION_URL=https://public-node.testnet.rsk.co
-      - REACT_APP_NODE_ID=31
-      - REACT_APP_CROWDFUNDING_ADDRESS=0x49733dF856718066Ca3eFA3a55B1Fa00c74C13de
-      - REACT_APP_EXCHANGE_RATE_PROVIDER_ADDRESS=0x0Aa058aD63E36bC2f98806f2D638353AE89C3634
-      - REACT_APP_FEATHERJS_CONNECTION_URL=https://beta.give4forest.org/
-      - REACT_APP_IPFS_GATEWAY=https://beta.give4forest.org/ipfs/
-      - REACT_APP_IPFS_PINNING_ENABLED=true
-    restart: always
+  #efem-dapp:
+  #  ports:
+  #    - "3010:3010"
+  #  environment:
+  #    - REACT_APP_ENVIRONMENT=rsk_testnet
+  #    - REACT_APP_NODE_CONNECTION_URL=https://public-node.testnet.rsk.co
+  #    - REACT_APP_NODE_ID=31
+  #    - REACT_APP_CROWDFUNDING_ADDRESS=0x49733dF856718066Ca3eFA3a55B1Fa00c74C13de
+  #    - REACT_APP_EXCHANGE_RATE_PROVIDER_ADDRESS=0x0Aa058aD63E36bC2f98806f2D638353AE89C3634
+  #    - REACT_APP_FEATHERJS_CONNECTION_URL=https://beta.give4forest.org/
+  #    - REACT_APP_IPFS_GATEWAY=https://beta.give4forest.org/ipfs/
+  #    - REACT_APP_IPFS_PINNING_ENABLED=true
+  #  restart: always
   efem-feathers:
     ports:
       - "3030:3030"
