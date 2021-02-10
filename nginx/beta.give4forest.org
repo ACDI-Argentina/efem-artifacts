@@ -11,7 +11,7 @@ server {
     server_name beta.give4forest.org;
 
     index index.html index.htm;
-    root /home/jona/build;
+    root /var/www/html/dapp;
 
 
     location /ipfs/ { 
@@ -35,16 +35,6 @@ server {
       try_files $uri /index.html;
     }
      
-}
-
-
-
-
-server {
-     listen 80;
-     listen [::]:80;
-     server_name beta.give4forest.org;
-
 }
 
 
