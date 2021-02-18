@@ -11,7 +11,7 @@ server {
     server_name beta.give4forest.org;
 
     index index.html index.htm;
-    root /var/www/html/dapp;
+    root /var/www/html/beta/dapp;
 
 
     location /ipfs/ { 
