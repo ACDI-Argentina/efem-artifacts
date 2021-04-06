@@ -64,9 +64,18 @@ const configurations = {
     },
     tokens: {
       // Token Nativo
-      '0x0000000000000000000000000000000000000000': {
+      rbtc: {
+        address: '0x0000000000000000000000000000000000000000',
+        isNative: true,
         symbol: 'RBTC',
         logoCid: '/ipfs/QmTsctkHWeVcuz6z2AWdi5zv3YCcVWSbmg2XF3tVs8jfn1',
+        showDecimals: 5
+      },
+      doc: {
+        address: '0x1111111111111111111111111111111111111111',
+        isNative: false,
+        symbol: 'DOC',
+        logoCid: '/ipfs/QmPgg4ZyNcRgC53H2jYPwRK6tKGtZiffzE2FwKYxkYCdLg',
         showDecimals: 5
       }
     },
@@ -175,6 +184,7 @@ const config = Object.assign({}, configurations[REACT_APP_ENVIRONMENT]);
 // Overwrite the environment values with parameters
 config.crowdfundingAddress = REACT_APP_CROWDFUNDING_ADDRESS || config.crowdfundingAddress;
 config.exchangeRateProviderAddress = REACT_APP_EXCHANGE_RATE_PROVIDER_ADDRESS || config.exchangeRateProviderAddress;
+config.tokens.doc.address = REACT_APP_TOKEN_DOC_ADDRESS || config.tokens.doc.address;
 config.liquidPledgingAddress = REACT_APP_LIQUIDPLEDGING_ADDRESS || config.liquidPledgingAddress;
 config.campaignFactoryAddress =
   REACT_APP_CAMPAIGN_FACTORY_ADDRESS || config.lppCampaignFactoryAddress;
