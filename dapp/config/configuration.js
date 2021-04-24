@@ -70,7 +70,7 @@ const configurations = {
         address: '0x0000000000000000000000000000000000000000',
         isNative: true,
         symbol: 'RBTC',
-        logoCid: '/ipfs/QmTsctkHWeVcuz6z2AWdi5zv3YCcVWSbmg2XF3tVs8jfn1',
+        logoCid: '/ipfs/QmRqPw4gVDv4uNaMzpJ1tjwm85CZysQAKTR8KfqzQzrr8B',
         showDecimals: 5,
         donateStep: 0.00001
       },
@@ -78,7 +78,7 @@ const configurations = {
         address: '0x1111111111111111111111111111111111111111',
         isNative: false,
         symbol: 'dRIF',
-        logoCid: '/ipfs/QmRPth8V7cHX7vKTHn6DZXS7zt7guZtt8Gm4JdTL5cmvwz',
+        logoCid: '/ipfs/QmcvQL7Yj4tryAmZPEB8qgeU1JwJNZAVN4zCcdWBNBkbQ9',
         showDecimals: 2,
         donateStep: 0.01
       },
@@ -86,9 +86,9 @@ const configurations = {
         address: '0x2222222222222222222222222222222222222222',
         isNative: false,
         symbol: 'DOC',
-        logoCid: '/ipfs/QmPgg4ZyNcRgC53H2jYPwRK6tKGtZiffzE2FwKYxkYCdLg',
+        logoCid: '/ipfs/QmS3XYpbPycRUmtqogrnr4REEF3St2Yu4MqUwjSoxBDjUE',
         showDecimals: 2,
-        donateStep: 0.00001
+        donateStep: 0.01
       }
     },
     tokenExchangeRate: {
@@ -178,7 +178,7 @@ const configurations = {
     nativeToken: {
       name: 'RBTC',
       symbol: 'RBTC',
-      logoCid: '/ipfs/QmTsctkHWeVcuz6z2AWdi5zv3YCcVWSbmg2XF3tVs8jfn1',
+      logoCid: '/ipfs/QmRqPw4gVDv4uNaMzpJ1tjwm85CZysQAKTR8KfqzQzrr8B',
       showDecimals: 5
     },
     anonymousDonationThreshold: 10000
