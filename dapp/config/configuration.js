@@ -24,6 +24,7 @@ const configurations = {
   localhost: {
     network: {
       requiredId: 33,
+      name: 'RSK Regtest',
       nodeUrl: 'http://localhost:4444',
       timeout: 20000,
       explorer: 'https://explorer.testnet.rsk.co/',
@@ -99,6 +100,7 @@ const configurations = {
   rsk_testnet: {
     network: {
       requiredId: 31,
+      name: 'RSK Testnet',
       nodeUrl: 'https://public-node.testnet.rsk.co',
       timeout: 20000,
       explorer: 'https://explorer.testnet.rsk.co/',
@@ -144,6 +146,7 @@ const configurations = {
   rsk_mainnet: {
     network: {
       requiredId: 30,
+      name: 'RSK Mainnet',
       nodeUrl: 'https://node.b4h.world',
       timeout: 20000,
       explorer: 'https://explorer.testnet.rsk.co/',
