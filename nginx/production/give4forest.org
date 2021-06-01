@@ -1,0 +1,21 @@
+upstream ipfs {
+  server localhost:8080;
+}
+
+server {
+    server_name give4forest.org;
+
+    index index.html index.htm;
+    root /var/www/html/dapp;
+
+    location /ipfs/ { 
+       proxy_pass http://ipfs;
+    }
+
+    location / {
+      try_files $uri /index.html;
+    }
+     
+}
+
+

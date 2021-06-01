@@ -1,0 +1,10 @@
+server {
+    server_name ipfs.beta.give4forest.org;
+
+  location ^~ /ipfs {
+        proxy_pass http://localhost:8080;
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+        allow all;
+     }
+}
