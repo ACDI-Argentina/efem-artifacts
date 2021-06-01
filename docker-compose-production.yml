@@ -1,0 +1,31 @@
+version: "3"
+services:
+  efem-feathers:
+    container_name: efem-feathers
+    image: acdi/give4forests-feathers:latest
+    ports:
+      - "3030:3030"
+    restart: always
+    volumes:
+      - /etc/efem/feathers/default.json:/usr/src/app/config/default.json
+      - /etc/efem/feathers/.env:/usr/src/app/config/.env
+      - /etc/efem/feathers/.env:/usr/src/app/.env
+    depends_on:
+      - efem-ipfs
+
+  efem-ipfs:
+    container_name: efem-ipfs
+    image: acdi/give4forests-ipfs
+    ports:
+      - "4001:4001"     # Swarm tcp, should be exposed to the public
+      - "4001:4001/udp" # Swarm tcp, should be exposed to the public
+      - "8080:8080"     # Web Gateway
+    restart: always
+
+    volumes:
+      - ipfs-data:/data/ipfs
+      - ipfs-export:/export
+
+volumes:
+  ipfs-data:
+  ipfs-export:
