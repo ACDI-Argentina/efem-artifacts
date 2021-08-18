@@ -1,0 +1,18 @@
+version: "3"
+services:
+  efem-ipfs:
+    image: acdi/give4forests-ipfs
+    restart: always
+    ports:
+      - "4001:4001"     # Swarm tcp, should be exposed to the public
+      - "4001:4001/udp" # Swarm tcp, should be exposed to the public
+      - "127.0.0.1:5001:5001"     # Daemon API; must not be exposed publicly but to client services under you control
+      - "127.0.0.1:8080:8080"     # Web Gateway
+    volumes:
+      - ipfs-data:/data/ipfs
+      - ipfs-export:/export
+      
+volumes:
+  ipfs-data:
+  ipfs-export:
+      

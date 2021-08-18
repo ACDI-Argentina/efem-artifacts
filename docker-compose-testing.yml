@@ -19,8 +19,8 @@ services:
     ports:
       - "4001:4001"     # Swarm tcp, should be exposed to the public
       - "4001:4001/udp" # Swarm tcp, should be exposed to the public
-      - "5001:5001"     # Daemon API; must not be exposed publicly but to client services under you control
-      - "8080:8080"     # Web Gateway
+      - "127.0.0.1:5001:5001"   # Daemon API; must not be exposed publicly but to client services under you control
+      - "127.0.0.1:8080:8080"     # Web Gateway
     restart: always
 
     volumes:
