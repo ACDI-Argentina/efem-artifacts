@@ -2,6 +2,8 @@ version: "3"
 services:
   efem-ipfs:
     container_name: ipfs
+    environment:
+      - IPFS_PROFILE=server
     image: acdi/give4forests-ipfs
     restart: always
     ports:
