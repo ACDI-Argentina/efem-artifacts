@@ -1,0 +1,62 @@
+{
+  "host": "localhost",
+  "port": 3030,
+  "dappUrl": "localhost:3010",
+  "public": "../public/",
+  "paginate": {
+    "default": 25,
+    "max": 100
+  },
+  "uploads": "../uploads",
+  "uploadsBaseUrl": "http://localhost:3030/uploads/",
+  "logDir": "",
+  "ipfsGateway": "http://localhost:8080/ipfs/",
+  "ipfsApi": "/ip4/127.0.0.1/tcp/5001",
+  "authentication": {
+    "secret": "fc04928dc74759168bf7cbc58bd2e43983e050342a82d25af4b93396d904020006b84e67cb45030fe906db9039d4aba720b6dc68564a3577cb1e6e34c9c8a1b6cbc6e3f824ead946ab9f66180647deb5ad097378b1e40440dc9e102a8113b904931481133a80aac801a2f65970e02edaf579b4cfee10cf704d86adbb819cae14578cc4d9f126bae6cad65ae4ad243c550f4af42ad743b2d4061ec54b80e64978a98a0283d99ee2489b9059ca9ac0681f4bd54eb8052ab2a11a5b96e58a171dde225e182913ae4cb60c34cc8b54f93986ffa2c57284a3cd2710170e0cfd272f303d6852447d6a2863fb644d02465b2f2be667c9fbd7798b4f5cc2e70749840f2c",
+    "strategies": ["jwt", "web3"],
+    "path": "/authentication",
+    "service": "users",
+    "jwt": {
+      "header": {
+        "type": "access"
+      },
+      "audience": "https://beta.give4forest.org",
+      "subject": "anonymous",
+      "issuer": "feathers-acdi-beta",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    },
+    "web3": {
+      "entity": "user"
+    }
+  },
+  "fiatWhitelist": [
+    "USD"
+  ],
+  "tokenWhitelist": [
+    {
+      "name": "RBTC",
+      "symbol": "RBTC",
+      "decimals": 18
+    }
+  ],
+  "networks": [
+    {
+      "chainId": 33,
+      "name": "RSK Regtest",
+      "url":"http://rsk-node-regtest:4444"
+    },
+    {
+      "chainId": 31,
+      "name": "RSK Testnet",
+      "url":"https://public-node.testnet.rsk.co"
+    },
+    {
+      "chainId": 30,
+      "name": "RSK Mainnet",
+      "url":"https://node.b4h.world"
+    }
+  ],
+  "adminContractAddress":"0x05A55E87d40572ea0F9e9D37079FB9cA11bdCc67"
+}

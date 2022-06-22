@@ -2,8 +2,8 @@
 
 IMG_TAG=v1.0.0-beta.1
 
-SERVICE_NAME=efem-feathers
-IMAGE_NAME=acdi/give4forests-feathers
+SERVICE_NAME=give4forest-feathers
+IMAGE_NAME=acdi/give4forest-feathers
 
 docker-compose -f docker-compose.yml -f docker-compose.development.yml build ${SERVICE_NAME}
 

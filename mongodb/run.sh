@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CONTAINER=efem-mongodb
+CONTAINER=give4forest-mongodb
 IMAGE="mongo:3.6.18"
 
 docker run -d \

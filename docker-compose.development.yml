@@ -1,6 +1,6 @@
 version: "3"
 services:
-  efem-dapp:
+  give4forest-dapp:
     build: ./dapp
     ports:
       - "3010:3010"
@@ -18,13 +18,12 @@ services:
     volumes:
 #      - ./dapp/config/configuration.js:/usr/src/app/src/configuration.js
       - ${DAPP_PATH_SRC:-./dapp/app/src}:/usr/src/app/src
-      - ${DAPP_PATH_ENV:-./dapp/app/.env}:/usr/src/app/.env
       - ${SMART_CONTRACT_PROJECT}:/usr/src/app/node_modules/@acdi/give4forests-crowdfunding-contract
     depends_on:
       - efem-rsk
 
 
-  efem-feathers:
+  give4forest-feathers:
     build: ./feathers
     ports:
       - "3030:3030"
@@ -35,6 +34,8 @@ services:
     depends_on:
       - efem-rsk
 
+
+  
 
   efem-ipfs:
     build: 

@@ -1,6 +1,6 @@
 #!/bin/bash
 IMAGE=efem/dapp
-CONTAINER=efem-dapp
+CONTAINER=give4forest-dapp
 
 APP_PATH=/usr/src/app
 CONFIG_PATH=$(pwd)/config/configuration.js

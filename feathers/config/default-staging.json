@@ -1,16 +1,16 @@
 {
   "host": "localhost",
   "port": 3030,
-  "dappUrl": "efem-dapp:3010",
+  "dappUrl": "give4forest-dapp:3010",
   "public": "../public/",
   "paginate": {
     "default": 25,
     "max": 100
   },
-  "mongodb": "mongodb://efem-mongodb:27017/giveth",
+  "mongodb": "mongodb://give4forest-mongodb:27017/giveth",
   "nedb": "../data",
   "uploads": "../uploads",
-  "uploadsBaseUrl": "http://efem-feathers:3030/uploads/",
+  "uploadsBaseUrl": "http://give4forest-feathers:3030/uploads/",
   "logDir": "",
   "ipfsGateway": "https://beta.give4forest.org/ipfs/",
   "ipfsApi": "/ip4/34.122.49.162/tcp/5001",

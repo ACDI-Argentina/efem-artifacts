@@ -1,30 +1,30 @@
 version: "3"
 services:
-  efem-dapp:
-    container_name: efem-dapp
-    image: acdi/give4forests-dapp
+  give4forest-dapp:
+    container_name: give4forest-dapp
+    image: acdi/give4forest-dapp
     stdin_open: true
     depends_on:
-      - efem-ipfs
-      - efem-mongodb
-      - efem-feathers
+      - give4forest-ipfs
+      - give4forest-mongodb
+      - give4forest-feathers
 
-  efem-feathers:
-    container_name: efem-feathers
+  give4forest-feathers:
+    container_name: give4forest-feathers
     image: acdi/give4forests-feathers
     depends_on:
-      - efem-ipfs
-      - efem-mongodb
+      - give4forest-ipfs
+      - give4forest-mongodb
 
-  efem-ipfs:
+  give4forest-ipfs:
     container_name: efem-ipfs
     image: acdi/give4forests-ipfs
     volumes:
       - ipfs-data:/data/ipfs
       - ipfs-export:/export
 
-  efem-mongodb:
-    container_name: efem-mongodb
+  give4forest-mongodb:
+    container_name: give4forest-mongodb
     image: mongo:3.6.18
     ports:
       - "27017"

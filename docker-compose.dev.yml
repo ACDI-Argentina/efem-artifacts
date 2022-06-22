@@ -1,0 +1,66 @@
+version: "3"
+services:
+  give4forest-dapp:
+    container_name: give4forest-dapp
+    build: ./dapp
+    image: acdi/give4forest-dapp
+    ports:
+      - "3010:3010"
+    stdin_open: true
+    volumes:
+      - ./dapp/config/configuration.js:/usr/src/app/src/configuration.js
+      - .env:/usr/src/app/.env
+      - ${DAPP_PATH_SRC:-./dapp/app/src}:/usr/src/app/src
+    depends_on:
+      - give4forest-ipfs
+      - give4forest-mongodb
+      - give4forest-feathers
+
+  give4forest-feathers:
+    container_name: give4forest-feathers
+    build: ./feathers
+    image: acdi/give4forest-feathers
+    ports:
+      - "3030:3030"
+    volumes:
+      - .env:/usr/src/app/.env
+      - ./feathers/config/default.json:/usr/src/app/config/default.json
+      - ./feathers/config/authentication.js:/usr/src/app/config/authentication.js
+      - ${FEATHERS_PATH_SRC:-./feathers/src}:/usr/src/app/src
+    depends_on:
+      - give4forest-ipfs
+      - give4forest-mongodb
+
+  give4forest-ipfs:
+    container_name: give4forest-ipfs
+    image: acdi/give4forest-ipfs
+    build: 
+      context: ./ipfs
+    ports:
+      - "4001:4001"
+      - "5001:5001"
+      - "8080:8080"
+    volumes:
+      - ${IPFS_DATA:-./ipfs/data}:/data/ipfs
+      - ${IPFS_EXPORT:-./ipfs/export}:/export
+
+  give4forest-mongodb:
+    container_name: give4forest-mongodb
+    image: mongo:5.0.0
+    ports:
+      - "27017:27017"
+
+  give4forest-users-feathers:
+    container_name: give4forest-users-feathers
+    build: ./efem-users-feathers
+    image: acdi/efem-users-feathers
+    ports:
+      - "3031:3030"
+    volumes:
+      - .env:/usr/src/app/.env
+      - ./efem-users-feathers/config/config.js:/usr/src/app/config/config.js
+      - ./efem-users-feathers/config/default.json:/usr/src/app/config/default.json
+      - ./efem-users-feathers/config/authentication.js:/usr/src/app/config/authentication.js
+      - ${FEATHERS_USER_PATH_SRC:-./efem-users-feathers/src}:/usr/src/app/src
+      - C:\dev\acdi\project\efem-contract:/usr/src/app/node_modules/@acdi/efem-contract
+

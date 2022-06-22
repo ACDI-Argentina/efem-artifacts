@@ -1,0 +1,12 @@
+version: "3"
+services:
+  rsk-node-regtest:
+    container_name: rsk-node-regtest
+    image: rsk-node-regtest
+    build: 
+      context: ./rsk/regtest
+      dockerfile: Dockerfile.RegTest
+    ports:
+      - "4444:4444"
+      - "4445:4445"
+      - "30305:30305"

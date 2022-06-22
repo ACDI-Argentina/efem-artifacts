@@ -1,7 +1,7 @@
 version: "3"
 services:
-  efem-feathers:
-    container_name: efem-feathers
+  give4forest-feathers:
+    container_name: give4forest-feathers
     image: acdi/give4forests-feathers:latest
     ports:
       - "3030:3030"

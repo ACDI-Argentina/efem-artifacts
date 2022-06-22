@@ -1,126 +1,138 @@
-# El futuro está en el monte - Instructivo de despliegue 
-Debido a la cantidad de partes que componen la solución, cada una con sus distintos requisitos de dependencias, se decidió utilizar [docker compose](https://docs.docker.com/compose/) para realizar el despliegue de la misma.
-Docker compose se basa en contenedores, los cuales contienen una parte de la solución junto con las dependencias requeridas por esa parte. Esto nos da como ventaja que podamos ejecutar, sin tener que instalar las dependencias de forma local, lo cual podría originar conflictos si ya tenemos otras versiones de las mismas. 
+# Give4Forest - Instructivo de despliegue 
 
-## Recursos definidos en docker-compose
-#### Contenedores
-La solución está compuesta por los siguientes contenedores:
-* efem-dapp
-* efem-feathers
-* efem-ipfs
-* efem-mongodb 
-* efem-rsk (solo disponible en el environment development)
+El despliegue de Give4Forest se realiza a través de contenedores Docker y Docker Compose.
 
-Las imágenes a partir de las cuales se crean estos contenedores, se indican en el diagrama a continuación.
-![EFEM Despliegue](despliegue.svg)
+El despliegue se presenta a continuación.
 
-#### Volúmenes
-Tanto **efem-ipfs** como **efem-mongodb** necesitan persistir datos más allá del ciclo de vida del contenedor. Es decir, si el contenedor se detiene por algún motivo, sería deseable no perder los datos almacenados hasta el momento. Se utilizan tres vólumenes, dos para ipfs, y uno para mongodb. Es posible administrarlos utilizando ``docker volume``. En el caso de querer borrarlos, simplemente usamos ``docker-compose down -v``.
-#### Redes
-Por defecto, docker-compose crea una red virtual y conecta a todos los contenedores especificados en el mismo archivo. Gracias a esto los contenedores pueden referirse entre si utilizando un esquema de nombres. A modo de ejemplo efem-feathers, puede configurar la conexión a la base datos, utilizando la url ``mongodb://efem-mongodb:27017/``
-donde *efem-mongodb* es el nombre del contenedor, y docker se encargará de resolverlo automáticamente.
+![Despliegue](despliegue.svg)
 
+## Requerimientos
 
-## Dependencias
+Para instalar la aplicación se requiere:
 
-Para poder ejecutar los contenedores es necesario tener instalado [**docker**](https://docs.docker.com/get-docker/) y [**docker-compose**](https://docs.docker.com/compose/install/).
+- [Git](https://git-scm.com/)
+- [Docker](https://docs.docker.com/get-docker/)
+- [Docker compose](https://docs.docker.com/compose/install/)
 
-Las pruebas se han realizado sobre Ubuntu 20.04, con Docker **19.03.8** y docker-compose  **1.25.0**. También es necesario contar con git para poder clonar los repositorios necesarios.
+> Las pruebas se han realizado sobre Ubuntu `20.04`, con Docker `19.03.8` y Docker Compose `1.25.0`.
 
-## Configuración del ambiente
+## Procedimiento
 
-Por workaround al problema de resolución de nombres, se deben agregar las siguientes entradas en el archivo */etc/hosts*.
+### 1. Ejecutar nodo RSK
+
+Las instrucciones oficiales se encuentran en el [portal de desarrollo de RSK](https://developers.rsk.co/rsk/node/install).
+
+RSK cuenta con 3 redes:
+
+  - *Desarrollo*: *Regtest*
+  - *Testing*: *Testnet*
+  - *Producción*: *Mainnet*
+
+Para las redes de *Testing* y *Producción* existen nodos públicos que pueden ser utilizados.
+
+En *Desarrollo* se recomienda iniciar un nodo privado RSK local de la siguiente manera:
 
 ```
-127.0.0.1     efem-ipfs
-127.0.0.1     efem-feathers
+docker-compose -f docker-compose.dev.rsk-node-regtest.yml up -d
+```
+Para detener el nodo y eliminar el contenedor debe ejecutarse lo siguiente:
+
+```
+docker-compose -f docker-compose.dev.rsk-node-regtest.yml down
 ```
 
-## Prerequisitos
+> El contenedor debe eliminarse ya que se produce un error si se inicia el mismo contenedor nuevamente.
 
-### Descarga de proyectos desde github
-Para la construcción de las imágenes de dapp y de feathers, es necesario obtener el código fuente desde los repositorios en github, para eso usamos los scripts fetch-dapp y fetch-feathers, los cuales clonan la rama efem-dev en directorios locales.
+### 2. Desplegar smart contract
+
+Se debe desplegar el smart contract de Give4Forest en el nodo de RSK iniciado localmente. Las instrucciones de desplegue en desarrollo se detallan [aquí](https://github.com/ACDI-Argentina/give-4-forest-contract/tree/master/apps/crowdfunding#desarrollo).
+
+Las direcciones de los smart contracts desplegados deben actualizarse en la configuración, establecéndose las siguientes variables de ambiente:
+
+  - REACT_APP_CROWDFUNDING_ADDRESS
+  - REACT_APP_EXCHANGE_RATE_PROVIDER_ADDRESS
+  - REACT_APP_TOKEN_RIF_ADDRESS
+  - REACT_APP_TOKEN_DOC_ADDRESS
+
+### 3. Descargar proyectos desde Github
+
+Para la construcción de las imágenes de *give4forest-dapp* y de *give4forest-feathers*, se requiere descargar el código fuente desde los repositorios en Github. Los siguientes scrtips son de utilidad para este paso.
+
 ```bash
-./fetch-dapp.sh
-./fetch-feathers.sh
+.\scripts\clone-give4forest-dapp.sh
+.\scripts\clone-give4forest-feathers.sh
 ```
-Una vez descargado el código fuente podemos continuar con la creación de las imágenes.
-Este paso solo es necesario en el caso de que se quiera trabajar en un entorno de desarrollo, para otros entornos, las imagenes de los contenedores
-se obtendran directamente desde [dockerhub](https://hub.docker.com/u/acdi).
 
+> Este paso solo es necesario en el caso de que se trabaje en un entorno de desarrollo. Para los demás ambientes, las imagenes de los contenedores se pueden obtener directamente desde [ACDI Dockerhub](https://hub.docker.com/u/acdi). 
+> En el caso del servicio *efem-users-feathers* el mismo es ejecutado utilizando la imagen publicada en dockerhub, independientemente del entorno utilizado.
 
-### Configuración de las variables de entorno
-Las variables utilizadas en el archivo docker-compose deben establecerse en el archivo .env que se encuentra en este directorio. Son montajes opcionales utilizados con popósito de desarrollo.
+### 4. Configuración
 
-#### IPFS Pinning
+Los archivos de configuración se encuentran montados en los contenedores en forma de [bind mount](https://docs.docker.com/storage/bind-mounts/). De esta forma es posible cambiar la configuración sin reconstruir las imágenes.
 
-Para utilizar el servicio de IPFS Pinning de Pinata es necesario configurar las siguientes variables de entorno en el archivo *feathers/app/.env*:
+Adicional a los archivos de configuración, puede parametrizarse el archivo de ambiente `.env` para establecer el valor de variables de ambiente.
+
+**Give4Forest Dapp**
+
+Configurar el archivo `dapp/config/configuration.js`.
+
+En el caso de la dapp, se inicia en modo `development`, por lo que los cambios son tomados tan pronto se modifique el archivo sin reiniciar el contenedor.
+
+Configurar la url del servicio de usuarios usando la variable de entorno `REACT_APP_FEATHERJS_USERS_CONNECTION_URL`.
+
+**Avalado Feathers**
+
+Configurar el archivo `feathers/config/default.json`.
+
+**Efem users service**
+
+Configurar el archivo `efem-users-feathers/config/default.json`.
+
+Configurar la conexión con la base de datos usando la variable de entorno `USERS_MONGO_DB`. Tomar de ejemplo la que se muestra en .env-example.
+
+#### Configuración de DNS
+
+Se deben agregar las siguientes entradas en el archivo */etc/hosts*.
+
+```
+127.0.0.1     give4forest-ipfs
+127.0.0.1     give4forest-feathers
+127.0.0.1     efem-users-service
+127.0.0.1     avaldao-mongodb
+```
+
+Esto es para que los host de los contenedores sean accesibles por su nombre desde el host de desarrollo.
+
+### 5. Ejecución
+
+Al momento de ejecutar los contenedores, debe elegirse cual es el ambiente (`development`|`staging`|`production`) que se desea utilizar.
+
+Por ejemplo, para iniciar el ambiente de `development`, el cual es utilizado para el desarrollo local, se debe ejecutar lo siguiente:
+
+```bash
+docker-compose -f docker-compose.dev.yml up
+```
+
+Esto inicia los contenedores en el orden adecuado.
+En el caso de aquellos contenedores para los cuales no tenga una imágen en el registro local, se crearán utilizando los archivo `Dockerfiles` que se encuentran en los directorios especificados en la directiva `build` del servicio.
+
+## Problemas conocidos
+
+### Configuración de CORS en IPFS
+
+La primera vez que se inicia el contenedor `give4forest-ipfs`, no cuenta con CORS habilitado. Si bien se han ejecutado los comandos para configurar las opciones, no toman efecto hasta que el contenedor es reiniciado. Por este motivo, es necesario ejecutar el comando *update.sh* que se encuentra en el directorio *ipfs*.
+
+```bash
+# Workaround por problema de configuración de CORS en IPFS (ejecutar solo una vez).
+./ipfs/update.sh
+```
+
+## IPFS Pinning
+
+Para utilizar el servicio de IPFS Pinning de Pinata es necesario configurar las siguientes variables de entorno en el archivo *.env*:
 
 ```
 PINATA_API_KEY="your pinata api key"
 PINATA_SECRET_API_KEY="your pinata secret api key"
 ```
 Estas datos deben ser mantenidos fuera del versionado en Github.
-
-## Ejecución
-Al momento de ejecutar los contenedores, debemos elegir cual es el environment [development | staging | production] que se desea utilizar.
-A modo de ejemplo, para iniciar el enviroment de development, el cual es utilizado para el desarrollo local, debemos ejecutar lo siguiente:
-```bash
-docker-compose -f docker-compose.yml -f docker-compose.development.yml up -d
-# Workaround por problema de configuración de CORS en IPFS.
-./ipfs/update.sh
-```
-Esto iniciará todos los contenedores del esquema, en un orden adecuado. En el caso de aquellos contenedores para los cuales no tenga una imágen en el registro local, procederá a la creación de las mismas utilizando los Dockerfiles que se encuentren en los directorios especificados en  la directiva build del servicio. Esto puede tomar algo de tiempo la primera vez que lo ejecutemos, especialmente en el caso de dapp y feathers que son los dos contenedores que más dependencias instalan a partir de npm.
-
-## Despliegue de smart contracts
-
-Una vez que los servicios se encuentren levantados, es necesario desplegar el smart contract de Crowdfunding según sus instrucciones de [despliegue](https://github.com/ACDI-Argentina/efem-aragon-apps/tree/efem-dev/apps/crowdfunding#despliegue).
-
-Una vez completado el despliegue, debe tomarse la dirección de la App Crowdfunding:
-
-```
-Aragon deploy
- . . .
-Crowdfunding deploy
- - Libraries
-   . . .
- - Crowdfunding: 0x05A55E87d40572ea0F9e9D37079FB9cA11bdCc67
- . . .
- - Initialized
-```
-
-Y configurar la siguiente variable según el ambiente:
-
-- *dapp/config/configuration.js#crowdfundingAddress*
-
-En el caso de desarrollo, el cambio será reflejado en la dapp sin necesidad de reiniciar su contenedor.
-
-## Configuración de dapp y feathers
-
-Ambos contenedores obtienen su configuración a partir de dos archivos.
-En el caso de dapp, lo hace a través del archivo **dapp/config/configuration.js** , mientras que feathers utiliza el archivo **feathers/config/default.json**.
-
-Estos archivos se encuentran montados en los contenedores en forma de [bind mount](https://docs.docker.com/storage/bind-mounts/). De esta forma  podemos cambiar la configuración sin necesidad de reconstruir las imágenes.
-En el caso de la dapp, como se inicia en modo development, los cambios serán tomados tan pronto modifiquemos el archivo sin necesidad de reiniciar el contenedor. 
-## Problemas conocidos
-### CORS en ipfs
-La primera vez que se inicia el contenedor efem-ipfs, no tiene CORS habilitado. Si bien se han ejecutado los comandos para configurar las opciones, no toman efecto hasta que el contenedor es reiniciado. Por este motivo, es necesario ejecutar el comando update.sh que se encuentra en el directorio ipfs.
-```bash
-./ipfs/update.sh
-```
-### Resolución de nombres de contenedores en host
-Si bien los contenedores al estar conectados a la misma red, pueden comunicarse a través de sus nombres, esto no es válido para el host sobre el cúal se ejecutan los contenedores.
-La solución temporal fue agregar asociaciones en /etc/hosts los nombres de los contenedores hacia localhost. 
-
-```
-127.0.0.1     efem-ipfs
-127.0.0.1     efem-feathers
-
-```
-Este esquema se usa **solo de forma local con fines de desarrollo**. En el ambiente productivo, se ejecutarán los contenedores en distintos servidores, los cuales tendrán asociados nombres de dominio.
-
-### El contenedor efem-rsk no responde
-Algunas veces el contenedor efem-rsk queda en un estado inconsistente. Al ejecutar ``docker ps``  dicho contenedor se mostrará en estado unhealty. 
-Esto sucede cuando no es la primera vez que ejecutamos el entorno, ya que docker tratará de reutilizar el contenedor de efem-rsk creado anteriormente.
-Esto se soluciona fácilmente eliminando dicho contenedor con `docker rm efem-rsk` antes de hacer ``docker-compose up``
-
