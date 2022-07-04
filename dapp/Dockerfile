@@ -10,6 +10,22 @@ RUN npm install
 
 ADD app .
 
+####
+
+ADD efem-dapp /home/efem-dapp
+RUN cd /home/efem-dapp && npm install && yarn link && cd /usr/src/app && yarn link "@acdi/efem-dapp"
+
+
+#ADD efem-dapp /home/efem-dapp
+#RUN cd /home/efem-dapp
+#RUN cd /home/efem-dapp && npm install && yarn link && cd /usr/src/app && yarn link "@acdi/efem-dapp"
+#RUN npm install
+#RUN yarn link
+#RUN cd /usr/src/app
+#RUN yarn link "@acdi/efem-dapp"
+
+####
+
 #La configuración se va a establecer haciendo uso de un bind mount
 #ADD config/configuration.js src
 

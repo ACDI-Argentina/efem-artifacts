@@ -8,25 +8,12 @@ services:
       - "3010:3010"
     stdin_open: true
     volumes:
+      - .env:/usr/src/app/.env
       - ./dapp/config/configuration.js:/usr/src/app/src/configuration.js
-      - .env:/usr/src/app/.env
-      - ${DAPP_PATH_SRC:-./dapp/app/src}:/usr/src/app/src
-    depends_on:
-      - give4forest-ipfs
-      - give4forest-mongodb
-      - give4forest-feathers
-
-  give4forest-feathers:
-    container_name: give4forest-feathers
-    build: ./feathers
-    image: acdi/give4forest-feathers
-    ports:
-      - "3030:3030"
-    volumes:
-      - .env:/usr/src/app/.env
-      - ./feathers/config/default.json:/usr/src/app/config/default.json
-      - ./feathers/config/authentication.js:/usr/src/app/config/authentication.js
-      - ${FEATHERS_PATH_SRC:-./feathers/src}:/usr/src/app/src
+      - ${DAPP_PATH_SRC}:/usr/src/app/src
+      - ${GIVE4FOREST_CONTRACT_PATH_SRC}:/usr/src/app/node_modules/@acdi/give4forests-crowdfunding-contract
+      - ${EFEM_CONTRACT_PATH_SRC}:/usr/src/app/node_modules/@acdi/efem-contract
+      - ${EFEM_DAPP_PATH_SRC}:/home/efem-dapp/dist
     depends_on:
       - give4forest-ipfs
       - give4forest-mongodb
