@@ -1,6 +1,19 @@
 {
   "API": {
-    "HTTPHeaders": {}
+    "HTTPHeaders": {
+      "Access-Control-Allow-Credentials": [
+        "true"
+      ],
+      "Access-Control-Allow-Methods": [
+        "PUT",
+        "POST"
+      ],
+      "Access-Control-Allow-Origin": [
+        "http://localhost:3000",
+        "http://127.0.0.1:5001",
+        "https://webui.ipfs.io"
+      ]
+    }
   },
   "Addresses": {
     "API": "/ip4/0.0.0.0/tcp/5001",
@@ -74,16 +87,25 @@
   "Gateway": {
     "APICommands": [],
     "HTTPHeaders": {
+      "Access-Control-Allow-Credentials": [
+        "true"
+      ],
       "Access-Control-Allow-Headers": [
         "X-Requested-With",
         "Range",
         "User-Agent"
       ],
       "Access-Control-Allow-Methods": [
-        "GET"
+        "PUT",
+        "GET",
+        "POST",
+        "OPTIONS"
       ],
       "Access-Control-Allow-Origin": [
         "*"
+      ],
+      "Access-Control-Expose-Headers": [
+        "Ipfs-Hash"
       ]
     },
     "NoDNSLink": false,
@@ -91,7 +113,7 @@
     "PathPrefixes": [],
     "PublicGateways": null,
     "RootRedirect": "",
-    "Writable": false
+    "Writable": true
   },
   "Identity": {
     "PeerID": "12D3KooWHJ7hPHsWCvNVDDCou1WDPvYALr6zBgNCQhe9JScDTrCn",

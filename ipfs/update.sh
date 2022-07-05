@@ -1,5 +1,5 @@
 #!/bin/bash
-CONTAINER_NAME=ipfs
+CONTAINER_NAME=give4forest-ipfs
 
 docker exec ${CONTAINER_NAME} ipfs config --json API.HTTPHeaders.Access-Control-Allow-Credentials '["true"]'
 docker exec ${CONTAINER_NAME} ipfs config --json API.HTTPHeaders.Access-Control-Allow-Origin '["*"]'
