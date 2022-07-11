@@ -37,8 +37,8 @@ services:
     ports:
       - "27017:27017"
 
-  give4forest-users-feathers:
-    container_name: give4forest-users-feathers
+  efem-users-feathers:
+    container_name: efem-users-feathers
     build: ./efem-users-feathers
     image: acdi/efem-users-feathers
     ports:
