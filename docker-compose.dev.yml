@@ -11,12 +11,34 @@ services:
       - .env:/usr/src/app/.env
       - ./dapp/config/configuration.js:/usr/src/app/src/configuration.js
       - ${DAPP_PATH_SRC}:/usr/src/app/src
-      - ${GIVE4FOREST_CONTRACT_PATH_SRC}:/usr/src/app/node_modules/@acdi/give4forests-crowdfunding-contract
+      - ${DAPP_PATH_PUBLIC}:/usr/src/app/public
+      - ${GIVE4FOREST_CONTRACT_PATH_SRC}:/usr/src/app/node_modules/@acdi/give4forest-contract
       - ${EFEM_CONTRACT_PATH_SRC}:/usr/src/app/node_modules/@acdi/efem-contract
-      - ${EFEM_DAPP_PATH_SRC}:/home/efem-dapp/dist
+#     - ${EFEM_DAPP_PATH_SRC}:/home/efem-dapp/dist
+      - ${EFEM_DAPP_PATH_SRC}:/usr/src/app/node_modules/@acdi/efem-dapp/dist
     depends_on:
       - give4forest-ipfs
       - give4forest-mongodb
+
+  give4forest-efem-users-feathers:
+    container_name: give4forest-efem-users-feathers
+#    build: ./efem-users-feathers
+    image: acdi/efem-users-feathers
+    ports:
+      - "3031:3030"
+    volumes:
+      - .env:/usr/src/app/.env
+      - ./efem-users-feathers/config/config.js:/usr/src/app/config/config.js
+      - ./efem-users-feathers/config/default.json:/usr/src/app/config/default.json
+      - ./efem-users-feathers/config/authentication.js:/usr/src/app/config/authentication.js
+      - ${FEATHERS_USER_PATH_SRC:-./efem-users-feathers/src}:/usr/src/app/src
+      - ${EFEM_CONTRACT_PATH_SRC}:/usr/src/app/node_modules/@acdi/efem-contract
+
+  give4forest-mongodb:
+    container_name: give4forest-mongodb
+    image: mongo:5.0.0
+    ports:
+      - "27017:27017"
 
   give4forest-ipfs:
     container_name: give4forest-ipfs
@@ -30,24 +52,4 @@ services:
     volumes:
       - ${IPFS_DATA:-./ipfs/data}:/data/ipfs
       - ${IPFS_EXPORT:-./ipfs/export}:/export
-
-  give4forest-mongodb:
-    container_name: give4forest-mongodb
-    image: mongo:5.0.0
-    ports:
-      - "27017:27017"
-
-  efem-users-feathers:
-    container_name: efem-users-feathers
-    build: ./efem-users-feathers
-    image: acdi/efem-users-feathers
-    ports:
-      - "3031:3030"
-    volumes:
-      - .env:/usr/src/app/.env
-      - ./efem-users-feathers/config/config.js:/usr/src/app/config/config.js
-      - ./efem-users-feathers/config/default.json:/usr/src/app/config/default.json
-      - ./efem-users-feathers/config/authentication.js:/usr/src/app/config/authentication.js
-      - ${FEATHERS_USER_PATH_SRC:-./efem-users-feathers/src}:/usr/src/app/src
-      - C:\dev\acdi\project\efem-contract:/usr/src/app/node_modules/@acdi/efem-contract
 

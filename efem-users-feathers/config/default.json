@@ -14,17 +14,14 @@
   "ipfsApi": "/ip4/127.0.0.1/tcp/5001",
   "authentication": {
     "secret": "fc04928dc74759168bf7cbc58bd2e43983e050342a82d25af4b93396d904020006b84e67cb45030fe906db9039d4aba720b6dc68564a3577cb1e6e34c9c8a1b6cbc6e3f824ead946ab9f66180647deb5ad097378b1e40440dc9e102a8113b904931481133a80aac801a2f65970e02edaf579b4cfee10cf704d86adbb819cae14578cc4d9f126bae6cad65ae4ad243c550f4af42ad743b2d4061ec54b80e64978a98a0283d99ee2489b9059ca9ac0681f4bd54eb8052ab2a11a5b96e58a171dde225e182913ae4cb60c34cc8b54f93986ffa2c57284a3cd2710170e0cfd272f303d6852447d6a2863fb644d02465b2f2be667c9fbd7798b4f5cc2e70749840f2c",
-    "strategies": [
-      "jwt",
-      "web3"
-    ],
+    "strategies": ["jwt", "web3"],
     "path": "/authentication",
     "service": "users",
     "jwt": {
       "header": {
         "type": "access"
       },
-      "audience": "https://beta.give4forest.org",
+      "audience": "https://acdi.org.ar",
       "subject": "anonymous",
       "issuer": "feathers-acdi-beta",
       "algorithm": "HS256",
@@ -48,114 +45,20 @@
     {
       "chainId": 33,
       "name": "RSK Regtest",
-      "url": "http://rsk-node-regtest:4444"
+      "url":"http://rsk-node-regtest:4444"
     },
     {
       "chainId": 31,
       "name": "RSK Testnet",
-      "url": "https://public-node.testnet.rsk.co"
+      "url":"https://public-node.testnet.rsk.co"
     },
     {
       "chainId": 30,
       "name": "RSK Mainnet",
-      "url": "https://node.b4h.world"
+      "url":"https://node.b4h.world"
     }
   ],
-  "adminContractAddress": "0x05A55E87d40572ea0F9e9D37079FB9cA11bdCc67",
-  "roles": [
-    {
-      "value": "ADMIN_ROLE",
-      "hash": "0xa49807205ce4d355092ef5a8a18f56e8913cf4a201fbe287825b095693c21775",
-      "label": "Admin",
-      "app": "0x05A55E87d40572ea0F9e9D37079FB9cA11bdCc67"
-    },
-
-    
-    {
-      "value": "AVALDAO_ROLE",
-      "hash": "0x6fe48ba75814b08c0dddc279841efe9da58be3efa246107d47304a151682bb53",
-      "label": "Avaldao",
-      "app": "0x05A55E87d40572ea0F9e9D37079FB9cA11bdCc67"
-    },
-    {
-      "value": "SOLICITANTE_ROLE",
-      "hash": "0xfb35233533db5c7fd0b9bddd918dc9ee7dc650bcb29116685e303e733d8351bb",
-      "label": "Solicitante",
-      "app": "0x05A55E87d40572ea0F9e9D37079FB9cA11bdCc67"
-    },
-    {
-      "value": "COMERCIANTE_ROLE",
-      "hash": "0xf95d0e1c3ba95ce4614532f244d16b0981be4cfc6964c018cf3b9e6d860c5c6e",
-      "label": "Comerciante",
-      "app": "0x05A55E87d40572ea0F9e9D37079FB9cA11bdCc67"
-    },
-    {
-      "value": "AVALADO_ROLE",
-      "hash": "0x780a0ec41e5ee507f458f09f4a20097a58d10125acb87277c67891025e16cef6",
-      "label": "Avalado",
-      "app": "0x05A55E87d40572ea0F9e9D37079FB9cA11bdCc67"
-    },
-
-
-    {
-      "value": "DELEGATE_ROLE",
-      "hash": "0x1a82baf2b928242f69f7147fb92490c6288d044f7257b88817e6284f1eec0f15",
-      "label": "Delegate",
-      "app": "0x669E348cAd8aBeB10F489bF81c685f3eEA72798F"
-    },
-    {
-      "value": "CAMPAIGN_MANAGER_ROLE",
-      "hash": "0x5022544358ee0bece556b72ae8983c7f24341bd5b9483ce8a19bff5efbb2de92",
-      "label": "Campaign Manager",
-      "app": "0x669E348cAd8aBeB10F489bF81c685f3eEA72798F"
-    },
-    {
-      "value": "CAMPAIGN_REVIEWER_ROLE",
-      "hash": "0x634e3ca2e6368700bbf08d9508419cd87488d87c36c701a117b27ea1e3efb94e",
-      "label": "Campaign Reviewer",
-      "app": "0x669E348cAd8aBeB10F489bF81c685f3eEA72798F"
-    },
-    {
-      "value": "MILESTONE_MANAGER_ROLE",
-      "hash": "0xa3a2c0788fca84104c8a174fd5021fe337cdd81ef2dab39dfed0f397582c2efb",
-      "label": "Milestone Manager",
-      "app": "0x669E348cAd8aBeB10F489bF81c685f3eEA72798F"
-    },
-    {
-      "value": "MILESTONE_REVIEWER_ROLE",
-      "hash": "0x4d6e65593aeec72da9930817128ec8271cfd271f40a90712d7163837a7835ede",
-      "label": "Milestone Reviewer",
-      "app": "0x669E348cAd8aBeB10F489bF81c685f3eEA72798F"
-    },
-    {
-      "value": "RECIPIENT_ROLE",
-      "hash": "0x8b42d4fd5c2527b7732a4b075ccb928f88ffc087de1e4c401c8fc7ab80ea882e",
-      "label": "Recipient",
-      "app": "0x669E348cAd8aBeB10F489bF81c685f3eEA72798F"
-    },
-    {
-      "value": "CREATE_DAC_ROLE",
-      "hash": "0x27dcfaa805d739418c9c74189b634c1005c4272ef394c344d4a04a451d57e6c8",
-      "label": "Create DAC",
-      "app": "0x669E348cAd8aBeB10F489bF81c685f3eEA72798F"
-    },
-    {
-      "value": "CREATE_CAMPAIGN_ROLE",
-      "hash": "0x16d50609795428ec5fa457db737ec3568047847f63bf070b2edc21ed1f2aab7b",
-      "label": "Create Campaign",
-      "app": "0x669E348cAd8aBeB10F489bF81c685f3eEA72798F"
-    },
-    {
-      "value": "CREATE_MILESTONE_ROLE",
-      "hash": "0x324aca30d130a854e55500f1a7b303629413b3c281a79ce243e4f7e90314cf39",
-      "label": "Create Milestone",
-      "app": "0x669E348cAd8aBeB10F489bF81c685f3eEA72798F"
-    },
-    {
-      "value": "TRANSFER_ROLE",
-      "hash": "0x8502233096d909befbda0999bb8ea2f3a6be3c138b9fbf003752a4c8bce86f6c",
-      "label": "Transfer",
-      "app": "0x669E348cAd8aBeB10F489bF81c685f3eEA72798F"
-    }
-  ]
+  "adminContractAddress":"0x35e08235457394A1C50dF3C1641BD4996F2EBB5F",
+  "avaldaoContractAddress":"0x0185e73DaaC1FBF56f71448477026A6A3Dd39aFE",
+  "crowdfundingContractAddress":"0x59C62063dDf860997cE34Ac7AB5f1C01CeF057fD"
 }

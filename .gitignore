@@ -3,5 +3,7 @@ dapp/app
 feathers/app
 dapp-staging/build
 
+ipfs/data
+
 .env
 users-tesnet.json
